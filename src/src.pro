@@ -16,12 +16,12 @@ INCLUDEPATH += $$PWD \
 LIBS +=  -lfl -ly
 
 SOURCES += \
-    libKitsuneIni.cpp \
-    ini_parsing/iniParserInterface.cpp
+    ini_parsing/iniParserInterface.cpp \
+    iniItem.cpp
 
 HEADERS += \
-    ../include/libKitsuneIni/libKitsuneIni.h \
-    ini_parsing/iniParserInterface.h
+    ini_parsing/iniParserInterface.h \
+    ../include/libKitsuneIni/iniItem.h
 
 FLEXSOURCES = grammar/inilexer.l
 BISONSOURCES = grammar/iniparser.y

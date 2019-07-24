@@ -7,7 +7,7 @@
  *  MIT License
  */
 
-#include "libKitsuneIni.h"
+#include "iniItem.h"
 
 #include <ini_parsing/iniParserInterface.h>
 
@@ -20,7 +20,7 @@ namespace Ini
 /**
  * @brief IniObject::IniObject
  */
-IniObject::IniObject()
+IniItem::IniItem()
 {
 
 }
@@ -31,7 +31,7 @@ IniObject::IniObject()
  * @return
  */
 pair<std::string, bool>
-IniObject::parse(const std::string &content,
+IniItem::parse(const std::string &content,
                  const bool traceParsing)
 {
     pair<std::string, bool> result;
@@ -58,7 +58,7 @@ IniObject::parse(const std::string &content,
  * @return
  */
 Json::JsonItem*
-IniObject::get(const std::string &group,
+IniItem::get(const std::string &group,
                const std::string &item)
 {
     map<string, map<string, JsonItem*>>::iterator itGroup;
@@ -81,7 +81,7 @@ IniObject::get(const std::string &group,
  * @brief IniObject::print
  * @return
  */
-std::string IniObject::print()
+std::string IniItem::print()
 {
     std::string output = "";
 

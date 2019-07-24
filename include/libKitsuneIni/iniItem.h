@@ -25,11 +25,11 @@ namespace Ini
 {
 class IniParserInterface;
 
-class IniObject
+class IniItem
 {
 
 public:
-    IniObject();
+    IniItem();
 
     pair<std::string, bool> parse(const string &content,
                                   const bool traceParsing = false);

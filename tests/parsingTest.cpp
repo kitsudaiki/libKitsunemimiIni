@@ -8,7 +8,7 @@
  */
 
 #include "parsingTest.h"
-#include <libKitsuneIni.h>
+#include <iniItem.h>
 
 using namespace Kitsune::Json;
 
@@ -39,7 +39,7 @@ void ParsingTest::parserPositiveTest()
                       "\n");
 
 
-    IniObject object;
+    IniItem object;
     pair<std::string, bool> result = object.parse(input);
     UNITTEST(result.second, true);
 
