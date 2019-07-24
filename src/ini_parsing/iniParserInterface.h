@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-using Kitsune::Json::JsonItem;
+using namespace Kitsune::Json;
 using std::string;
 using std::map;
 using std::pair;
@@ -48,9 +48,6 @@ public:
     void error(const Kitsune::Ini::location &location,
                const std::string& message);
     std::string getErrorMessage() const;
-
-    // static variables, which are used in lexer and parser
-    static bool m_inRule;
 
 private:
     map<string, map<string, JsonItem *>> m_output;

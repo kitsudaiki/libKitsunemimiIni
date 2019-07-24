@@ -19,8 +19,6 @@ namespace Kitsune
 namespace Ini
 {
 
-bool IniParserInterface::m_inRule = false;
-
 /**
  * The class is the interface for the bison-generated parser.
  * It starts the parsing-process and store the returned values.
@@ -42,9 +40,6 @@ IniParserInterface::IniParserInterface(const bool traceParsing)
 bool
 IniParserInterface::parse(const std::string &inputString)
 {
-    // init static variables for new run
-    m_inRule = false;
-
     // init global values
     m_inputString = inputString;
     m_errorMessage = "";

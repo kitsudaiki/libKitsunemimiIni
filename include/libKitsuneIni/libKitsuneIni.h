@@ -14,7 +14,7 @@
 #include <string>
 #include <jsonItems.h>
 
-using Kitsune::Json::JsonItem;
+using namespace Kitsune::Json;
 using std::string;
 using std::map;
 using std::pair;
@@ -25,16 +25,20 @@ namespace Ini
 {
 class IniParserInterface;
 
-class KitsuneIniConverter
+class IniObject
 {
+
 public:
-    KitsuneIniConverter(const bool traceParsing = false);
-    ~KitsuneIniConverter();
+    IniObject();
 
-    pair<map<string, map<string, JsonItem*>>, bool> parse(const string &content);
+    pair<std::string, bool> parse(const string &content,
+                                  const bool traceParsing = false);
 
-private:
-    IniParserInterface* m_parser = nullptr;
+    JsonItem* get(const std::string& group,
+                  const std::string& item);
+    std::string print();
+
+    map<string, map<string, JsonItem*>> m_content;
 };
 
 }  // namespace Ini

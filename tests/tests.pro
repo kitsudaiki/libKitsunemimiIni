@@ -20,5 +20,9 @@ INCLUDEPATH += $$PWD
 LIBS += -L../src -lKitsuneIni
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    parsingTest.cpp
+
+HEADERS += \
+    parsingTest.h
 

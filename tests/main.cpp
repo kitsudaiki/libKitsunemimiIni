@@ -7,8 +7,10 @@
  *  MIT License
  */
 
+#include <parsingTest.h>
 
 int main()
 {
+    Kitsune::Ini::ParsingTest parsingTest;
     return 0;
 }

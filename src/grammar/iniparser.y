@@ -19,7 +19,6 @@
 %define api.namespace {Kitsune::Ini}
 %define api.token.constructor
 %define api.value.type variant
-
 %define parse.assert
 
 %code requires
@@ -91,15 +90,16 @@ startpoint:
     }
 
 grouplist:
-    grouplist groupheader linebreaks itemlist linebreaks
+    grouplist groupheader linebreaks itemlist
     {
-        std::map<std::string, std::map<std::string, JsonItem*>> newMap;
-        $$ = newMap;
+        $1.insert(std::pair<std::string, std::map<std::string, JsonItem*>>($2, $4));
+        $$ = $1;
     }
 |
-    groupheader linebreaks itemlist linebreaks
+    groupheader linebreaks itemlist
     {
         std::map<std::string, std::map<std::string, JsonItem*>> newMap;
+        newMap.insert(std::pair<std::string, std::map<std::string, JsonItem*>>($1, $3));
         $$ = newMap;
     }
 
