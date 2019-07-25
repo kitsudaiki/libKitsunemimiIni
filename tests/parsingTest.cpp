@@ -51,13 +51,21 @@ void ParsingTest::parserPositiveTest()
     std::string get2 = item2->print();
     UNITTEST(get2, "1.300000");
 
+    UNITTEST(object.set("hmmm2", "poi", "asdf"), true);
+    UNITTEST(object.set("hmmm2", "poi", "asdf"), false);
+
+    UNITTEST(object.set("hmmm", "poi", "asdf", true), true);
+
     std::string outputStringObjects = object.print();
     std::string compareObjects("[DEFAULT]\n"
                                "asdf = \"asdfasdf\"\n"
                                "x = 2\n"
                                "\n"
                                "[hmmm]\n"
-                               "poi = 1.300000\n"
+                               "poi = \"asdf\"\n"
+                               "\n"
+                               "[hmmm2]\n"
+                               "poi = \"asdf\"\n"
                                "\n");
     UNITTEST(outputStringObjects, compareObjects);
 }

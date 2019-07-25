@@ -36,12 +36,34 @@ public:
 
     JsonItem* get(const std::string& group,
                   const std::string& item);
+    bool set(const std::string& group,
+             const std::string& item,
+             const std::string value,
+             const bool force=false);
+    bool set(const std::string& group,
+             const std::string& item,
+             const int value,
+             const bool force=false);
+    bool set(const std::string& group,
+             const std::string& item,
+             const float value,
+             const bool force=false);
+    bool set(const std::string& group,
+             const std::string& item,
+             const std::vector<std::string> value,
+             const bool force=false);
+
     std::string print();
 
     void setContent(JsonItem* item);
 
 private:
     JsonItem* m_content = nullptr;
+
+    bool set(const std::string& group,
+             const std::string& item,
+             JsonItem* value,
+             bool force=false);
 };
 
 }  // namespace Ini
