@@ -73,9 +73,9 @@ YY_DECL;
 %token <int> NUMBER "number"
 %token <float> FLOAT "float"
 
-%type <std::map<std::string, std::map<std::string, JsonItem*>> > grouplist
+%type <JsonObject*> grouplist
 %type <std::string> groupheader
-%type <std::map<std::string, JsonItem*> > itemlist
+%type <JsonObject*> itemlist
 %type <JsonItem*> itemValue
 %type <JsonItem*> identifierlist
 
@@ -92,14 +92,14 @@ startpoint:
 grouplist:
     grouplist groupheader linebreaks itemlist
     {
-        $1.insert(std::pair<std::string, std::map<std::string, JsonItem*>>($2, $4));
+        $1->insert($2, $4);
         $$ = $1;
     }
 |
     groupheader linebreaks itemlist
     {
-        std::map<std::string, std::map<std::string, JsonItem*>> newMap;
-        newMap.insert(std::pair<std::string, std::map<std::string, JsonItem*>>($1, $3));
+        JsonObject* newMap = new JsonObject();
+        newMap->insert($1, $3);
         $$ = newMap;
     }
 
@@ -112,14 +112,14 @@ groupheader:
 itemlist:
     itemlist "identifier" "=" itemValue linebreaks
     {
-        $1.insert(std::pair<std::string, JsonItem*>($2, $4));
+        $1->insert($2, $4);
         $$ = $1;
     }
 |
     "identifier" "=" itemValue linebreaks
     {
-        std::map<std::string, JsonItem*> newMap;
-        newMap.insert(std::pair<std::string, JsonItem*>($1, $3));
+        JsonObject* newMap = new JsonObject();
+        newMap->insert($1, $3);
         $$ = newMap;
     }
 

@@ -1,5 +1,5 @@
 /**
- *  @file    libKitsuneIni.cpp
+ *  @file    iniItem.cpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -16,7 +16,6 @@ namespace Kitsune
 namespace Ini
 {
 
-
 /**
  * @brief IniObject::IniObject
  */
@@ -32,7 +31,7 @@ IniItem::IniItem()
  */
 pair<std::string, bool>
 IniItem::parse(const std::string &content,
-                 const bool traceParsing)
+               const bool traceParsing)
 {
     pair<std::string, bool> result;
     IniParserInterface parser(traceParsing);
@@ -59,22 +58,13 @@ IniItem::parse(const std::string &content,
  */
 Json::JsonItem*
 IniItem::get(const std::string &group,
-               const std::string &item)
+             const std::string &item)
 {
-    map<string, map<string, JsonItem*>>::iterator itGroup;
-    itGroup = m_content.find(group);
-
-    if(itGroup != m_content.end())
-    {
-        map<string, JsonItem*>::iterator itItem;
-        itItem = itGroup->second.find(item);
-
-        if(itItem != itGroup->second.end()) {
-            return itItem->second->copy();
-        }
+    JsonItem* groupContent = m_content->get(group);
+    if(groupContent == nullptr) {
+        return nullptr;
     }
-
-    return nullptr;
+    return groupContent->get(item);
 }
 
 /**
@@ -85,18 +75,20 @@ std::string IniItem::print()
 {
     std::string output = "";
 
-    map<string, map<string, JsonItem*>>::iterator itGroup;
-    for(itGroup = m_content.begin();
-        itGroup != m_content.end();
+    std::map<std::string, JsonItem*> completeContent = m_content->toObject()->getComplete();
+    std::map<std::string, JsonItem*>::iterator itGroup;
+    for(itGroup = completeContent.begin();
+        itGroup != completeContent.end();
         itGroup++)
     {
         output.append("[");
         output.append(itGroup->first);
         output.append("]\n");
 
+        std::map<std::string, JsonItem*> groupContent = itGroup->second->toObject()->getComplete();
         map<string, JsonItem*>::iterator itItem;
-        for(itItem = itGroup->second.begin();
-            itItem != itGroup->second.end();
+        for(itItem = groupContent.begin();
+            itItem != groupContent.end();
             itItem++)
         {
             output.append(itItem->first);
@@ -109,6 +101,19 @@ std::string IniItem::print()
     }
 
     return output;
+}
+
+/**
+ * @brief IniItem::setContent
+ * @param item
+ */
+void
+IniItem::setContent(JsonItem *item)
+{
+    if(m_content != nullptr) {
+        delete m_content;
+    }
+    m_content = item;
 }
 
 }  // namespace Ini

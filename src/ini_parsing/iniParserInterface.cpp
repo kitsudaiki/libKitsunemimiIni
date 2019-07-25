@@ -43,7 +43,7 @@ IniParserInterface::parse(const std::string &inputString)
     // init global values
     m_inputString = inputString;
     m_errorMessage = "";
-    m_output = map<string, map<string, JsonItem *>>();
+    m_output = nullptr;
 
     // run parser-code
     this->scan_begin(inputString);
@@ -63,7 +63,7 @@ IniParserInterface::parse(const std::string &inputString)
  * @param output parser-output as Json::JsonArray
  */
 void
-IniParserInterface::setOutput(map<string, map<string, JsonItem *>> output)
+IniParserInterface::setOutput(JsonItem *output)
 {
      m_output = output;
 }
@@ -73,7 +73,7 @@ IniParserInterface::setOutput(map<string, map<string, JsonItem *>> output)
  *
  * @return parser-output as Json::JsonArray
  */
-map<std::string, map<std::string, JsonItem *>>
+JsonItem*
 IniParserInterface::getOutput() const
 {
     return m_output;

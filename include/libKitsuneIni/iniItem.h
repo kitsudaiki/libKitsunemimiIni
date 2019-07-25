@@ -1,5 +1,5 @@
-/**
- *  @file    libKitsuneIni.h
+﻿/**
+ *  @file    iniItem.h
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#ifndef LIBKITSUNEINI_H
-#define LIBKITSUNEINI_H
+#ifndef INIITEM_H
+#define INIITEM_H
 
 #include <utility>
 #include <string>
@@ -38,10 +38,13 @@ public:
                   const std::string& item);
     std::string print();
 
-    map<string, map<string, JsonItem*>> m_content;
+    void setContent(JsonItem* item);
+
+private:
+    JsonItem* m_content = nullptr;
 };
 
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // LIBKITSUNEINI_H
+#endif // INIITEM_H

@@ -41,8 +41,8 @@ public:
     bool parse(const std::string &inputString);
 
     // output-handling
-    void setOutput(map<string, map<string, JsonItem *>> output);
-    map<string, map<string, JsonItem *>> getOutput() const;
+    void setOutput(JsonItem* output);
+    JsonItem* getOutput() const;
 
     // Error handling.
     void error(const Kitsune::Ini::location &location,
@@ -50,7 +50,7 @@ public:
     std::string getErrorMessage() const;
 
 private:
-    map<string, map<string, JsonItem *>> m_output;
+    JsonItem* m_output;
     std::string m_errorMessage = "";
     std::string m_inputString = "";
 
