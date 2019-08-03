@@ -21,8 +21,8 @@ LIBS += -L../src -lKitsuneIni
 
 SOURCES += \
         main.cpp \
-    parsingTest.cpp
+        parsingTest.cpp
 
 HEADERS += \
-    parsingTest.h
+    parsingTest.hpp
 

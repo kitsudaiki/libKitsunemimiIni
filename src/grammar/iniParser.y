@@ -28,7 +28,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <jsonItems.h>
+#include <jsonItems.hpp>
 
 namespace Kitsune
 {
@@ -49,7 +49,7 @@ using namespace Kitsune::Json;
 
 %code
 {
-#include <ini_parsing/iniParserInterface.h>
+#include <ini_parsing/iniParserInterface.hpp>
 # undef YY_DECL
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
@@ -151,7 +151,7 @@ itemValue:
 
 
 identifierlist:
-    identifierlist "." "identifier"
+    identifierlist "," "identifier"
     {
         JsonArray* array = dynamic_cast<JsonArray*>($1);
         array->append(new JsonValue($3));

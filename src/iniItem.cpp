@@ -7,9 +7,9 @@
  *  MIT License
  */
 
-#include "iniItem.h"
+#include "iniItem.hpp"
 
-#include <ini_parsing/iniParserInterface.h>
+#include <ini_parsing/iniParserInterface.hpp>
 
 namespace Kitsune
 {
@@ -177,7 +177,7 @@ std::string IniItem::print()
     std::string output = "";
 
     // iterate over all groups
-    std::map<std::string, JsonItem*> completeContent = m_content->toObject()->getComplete();
+    std::map<std::string, JsonItem*> completeContent = m_content->toObject()->m_objects;
     std::map<std::string, JsonItem*>::iterator itGroup;
     for(itGroup = completeContent.begin();
         itGroup != completeContent.end();
@@ -189,7 +189,7 @@ std::string IniItem::print()
         output.append("]\n");
 
         // iterate over group-content
-        std::map<std::string, JsonItem*> groupContent = itGroup->second->toObject()->getComplete();
+        std::map<std::string, JsonItem*> groupContent = itGroup->second->toObject()->m_objects;
         map<string, JsonItem*>::iterator itItem;
         for(itItem = groupContent.begin();
             itItem != groupContent.end();
@@ -202,7 +202,7 @@ std::string IniItem::print()
             if(itItem->second->getType() == JsonItem::ARRAY_TYPE)
             {
                 // print arrays
-                std::vector<JsonItem*> array = itItem->second->toArray()->getComplete();
+                std::vector<JsonItem*> array = itItem->second->toArray()->m_array;
                 for(uint64_t i = 0; i < array.size(); i++)
                 {
                     if(i != 0) {

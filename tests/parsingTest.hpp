@@ -10,8 +10,7 @@
 #ifndef PARSERTEST_H
 #define PARSERTEST_H
 
-#include <testing/commonTest.h>
-#include <jsonItems.h>
+#include <testing/commonTest.hpp>
 
 namespace Kitsune
 {

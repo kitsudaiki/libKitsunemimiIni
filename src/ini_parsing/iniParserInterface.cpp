@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#include <ini_parsing/iniParserInterface.h>
-#include <iniparser.h>
+#include <ini_parsing/iniParserInterface.hpp>
+#include <iniparser.hpp>
 
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)

@@ -3,8 +3,8 @@
 # include <climits>
 # include <cstdlib>
 # include <string>
-# include <ini_parsing/iniParserInterface.h>
-# include <iniparser.h>
+# include <ini_parsing/iniParserInterface.hpp>
+# include <iniparser.hpp>
 
 # undef yywrap
 # define yywrap() 1

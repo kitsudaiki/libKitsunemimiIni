@@ -7,7 +7,7 @@
  *  MIT License
  */
 
-#include <parsingTest.h>
+#include <parsingTest.hpp>
 
 int main()
 {

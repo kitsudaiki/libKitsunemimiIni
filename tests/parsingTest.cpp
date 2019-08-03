@@ -7,8 +7,9 @@
  *  MIT License
  */
 
-#include "parsingTest.h"
-#include <iniItem.h>
+#include "parsingTest.hpp"
+#include <iniItem.hpp>
+#include <jsonItems.hpp>
 
 using namespace Kitsune::Json;
 
