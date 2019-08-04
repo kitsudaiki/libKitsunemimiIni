@@ -7,10 +7,10 @@
  *  MIT License
  */
 
-#include <parsingTest.hpp>
+#include <libKitsuneIni/iniItem_test.hpp>
 
 int main()
 {
-    Kitsune::Ini::ParsingTest parsingTest;
+    Kitsune::Ini::IniItem_Test iniItem_test;
     return 0;
 }

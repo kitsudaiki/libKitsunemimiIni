@@ -21,8 +21,8 @@ LIBS += -L../src -lKitsuneIni
 
 SOURCES += \
         main.cpp \
-        parsingTest.cpp
+    libKitsuneIni/iniItem_test.cpp
 
 HEADERS += \
-    parsingTest.hpp
+    libKitsuneIni/iniItem_test.hpp
 

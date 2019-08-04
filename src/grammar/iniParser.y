@@ -136,7 +136,7 @@ itemValue:
 |
     "string"
     {
-        $$ = new JsonValue($1);
+        $$ = new JsonValue(driver.removeQuotes($1));
     }
 |
     "number"

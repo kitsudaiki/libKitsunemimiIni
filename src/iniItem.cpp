@@ -17,11 +17,18 @@ namespace Ini
 {
 
 /**
- * @brief IniObject::IniObject
+ * constructor
  */
-IniItem::IniItem()
-{
+IniItem::IniItem() {}
 
+/**
+ * destructor
+ */
+IniItem::~IniItem()
+{
+    if(m_content != nullptr) {
+        delete m_content;
+    }
 }
 
 /**

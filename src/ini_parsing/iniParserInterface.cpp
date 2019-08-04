@@ -8,7 +8,7 @@
  */
 
 #include <ini_parsing/iniParserInterface.hpp>
-#include <iniparser.hpp>
+#include <iniParser.hpp>
 
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
@@ -55,6 +55,30 @@ IniParserInterface::parse(const std::string &inputString)
         return false;
     }
     return true;
+}
+
+/**
+ * @brief IniParserInterface::removeQuotes
+ * @param input
+ * @return
+ */
+std::string
+IniParserInterface::removeQuotes(std::string input)
+{
+    if(input.length() == 0) {
+        return input;
+    }
+
+    if(input[0] == '\"' && input[input.length()-1] == '\"')
+    {
+        std::string result = "";
+        for(uint32_t i = 1; i < input.length()-1; i++)
+        {
+            result += input[i];
+        }
+        return result;
+    }
+    return input;
 }
 
 /**

@@ -1,5 +1,5 @@
 ﻿/**
- *  @file    iniItem.h
+ *  @file    iniItem.hpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#ifndef INIITEM_H
-#define INIITEM_H
+#ifndef INIITEM_HPP
+#define INIITEM_HPP
 
 #include <utility>
 #include <string>
@@ -30,6 +30,7 @@ class IniItem
 
 public:
     IniItem();
+    ~IniItem();
 
     pair<std::string, bool> parse(const string &content,
                                   const bool traceParsing = false);
@@ -69,4 +70,4 @@ private:
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // INIITEM_H
+#endif // INIITEM_HPP

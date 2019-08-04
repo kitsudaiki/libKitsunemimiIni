@@ -1,5 +1,5 @@
 /**
- *  @file    iniParserInterface.h
+ *  @file    iniParserInterface.hpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#ifndef INIPARSERINTERFACE_HH
-#define INIPARSERINTERFACE_HH
+#ifndef INIPARSERINTERFACE_HPP
+#define INIPARSERINTERFACE_HPP
 
 #include <vector>
 #include <string>
@@ -39,6 +39,7 @@ public:
     void scan_begin(const std::string &inputString);
     void scan_end();
     bool parse(const std::string &inputString);
+    std::string removeQuotes(std::string input);
 
     // output-handling
     void setOutput(JsonItem* output);
@@ -60,4 +61,4 @@ private:
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // ! INIPARSERINTERFACE_HH
+#endif // INIPARSERINTERFACE_HPP

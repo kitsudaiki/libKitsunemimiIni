@@ -4,7 +4,7 @@
 # include <cstdlib>
 # include <string>
 # include <ini_parsing/iniParserInterface.hpp>
-# include <iniparser.hpp>
+# include <iniParser.hpp>
 
 # undef yywrap
 # define yywrap() 1
