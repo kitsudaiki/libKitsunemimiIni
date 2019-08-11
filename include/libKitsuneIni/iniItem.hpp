@@ -57,6 +57,10 @@ public:
              const std::vector<std::string> value,
              const bool force=false);
 
+    bool removeGroup(const std::string& group);
+    bool removeEntry(const std::string& group,
+                     const std::string& item);
+
     std::string print();
 
     void setContent(Common::DataItem* item);

@@ -22,8 +22,9 @@ IniItem_Test::IniItem_Test()
     parse_test();
     get_test();
     set_test();
+    removeGroup_test();
+    removeEntry_test();
     print_test();
-    setContent_test();
 }
 
 /**
@@ -72,6 +73,49 @@ IniItem_Test::set_test()
 }
 
 /**
+ * removeGroup_test
+ */
+void
+IniItem_Test::removeGroup_test()
+{
+    IniItem object;
+    pair<std::string, bool> result = object.parse(getTestString());
+
+    UNITTEST(object.removeGroup("hmmm"), true);
+    UNITTEST(object.removeGroup("hmmm"), false);
+
+    std::string compare = "[DEFAULT]\n"
+                          "asdf = \"asdfasdf\"\n"
+                          "x = 2\n"
+                          "\n";
+
+    UNITTEST(object.print(), compare);
+}
+
+/**
+ * removeEntry_test
+ */
+void
+IniItem_Test::removeEntry_test()
+{
+    IniItem object;
+    pair<std::string, bool> result = object.parse(getTestString());
+
+    UNITTEST(object.removeEntry("DEFAULT", "x"), true);
+    UNITTEST(object.removeEntry("DEFAULT", "x"), false);
+    UNITTEST(object.removeEntry("fail", "x"), false);
+
+    std::string compare = "[DEFAULT]\n"
+                          "asdf = \"asdfasdf\"\n"
+                          "\n"
+                          "[hmmm]\n"
+                          "poi = 1.300000\n"
+                          "\n";
+
+    UNITTEST(object.print(), compare);
+}
+
+/**
  * print_test
  */
 void
@@ -82,15 +126,6 @@ IniItem_Test::print_test()
 
     std::string outputStringObjects = object.print();
     UNITTEST(outputStringObjects, getTestString());
-}
-
-/**
- * setContent_test
- */
-void
-IniItem_Test::setContent_test()
-{
-
 }
 
 /**

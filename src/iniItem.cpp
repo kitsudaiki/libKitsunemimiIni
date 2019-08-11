@@ -25,7 +25,10 @@ namespace Ini
 /**
  * constructor
  */
-IniItem::IniItem() {}
+IniItem::IniItem()
+{
+    m_content = new DataObject();
+}
 
 /**
  * destructor
@@ -49,7 +52,7 @@ IniItem::parse(const std::string &content,
     pair<std::string, bool> result;
     IniParserInterface parser(traceParsing);
 
-    // parse jinja2-template into a json-tree
+    // parse ini-template into a json-tree
     result.second = parser.parse(content);
 
     // process a failure
@@ -58,6 +61,9 @@ IniItem::parse(const std::string &content,
         return result;
     }
 
+    if(m_content != nullptr) {
+        delete m_content;
+    }
     m_content = parser.getOutput();
 
     return result;
@@ -136,6 +142,35 @@ IniItem::set(const std::string &group,
     }
 
     return set(group, item, array, force);
+}
+
+/**
+ * @brief IniItem::removeGroup
+ * @param group
+ * @return
+ */
+bool
+IniItem::removeGroup(const std::string &group)
+{
+    return m_content->remove(group);
+}
+
+/**
+ * @brief IniItem::removeEntry
+ * @param group
+ * @param item
+ * @return
+ */
+bool
+IniItem::removeEntry(const std::string &group,
+                     const std::string &item)
+{
+    DataItem* groupItem = m_content->get(group);
+    if(groupItem == nullptr) {
+        return false;
+    }
+
+    return groupItem->remove(item);
 }
 
 /**
