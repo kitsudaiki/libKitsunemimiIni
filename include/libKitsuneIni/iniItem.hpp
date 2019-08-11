@@ -12,15 +12,18 @@
 
 #include <utility>
 #include <string>
-#include <jsonItems.hpp>
+#include <vector>
+#include <map>
 
-using namespace Kitsune::Json;
 using std::string;
 using std::map;
 using std::pair;
 
 namespace Kitsune
 {
+namespace Common {
+class DataItem;
+}
 namespace Ini
 {
 class IniParserInterface;
@@ -35,8 +38,8 @@ public:
     pair<std::string, bool> parse(const string &content,
                                   const bool traceParsing = false);
 
-    JsonItem* get(const std::string& group,
-                  const std::string& item);
+    Common::DataItem* get(const std::string& group,
+                          const std::string& item);
     bool set(const std::string& group,
              const std::string& item,
              const std::string value,
@@ -56,14 +59,14 @@ public:
 
     std::string print();
 
-    void setContent(JsonItem* item);
+    void setContent(Common::DataItem* item);
 
 private:
-    JsonItem* m_content = nullptr;
+    Common::DataItem* m_content = nullptr;
 
     bool set(const std::string& group,
              const std::string& item,
-             JsonItem* value,
+             Common::DataItem* value,
              bool force=false);
 };
 

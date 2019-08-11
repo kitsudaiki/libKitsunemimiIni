@@ -14,11 +14,11 @@
 #include <string>
 #include <string>
 #include <map>
-#include <jsonItems.hpp>
+#include <data_structure/dataItems.hpp>
 
 #include <iostream>
 
-using namespace Kitsune::Json;
+using Kitsune::Common::DataItem;
 using std::string;
 using std::map;
 using std::pair;
@@ -42,8 +42,8 @@ public:
     std::string removeQuotes(std::string input);
 
     // output-handling
-    void setOutput(JsonItem* output);
-    JsonItem* getOutput() const;
+    void setOutput(DataItem* output);
+    DataItem* getOutput() const;
 
     // Error handling.
     void error(const Kitsune::Ini::location &location,
@@ -51,7 +51,7 @@ public:
     std::string getErrorMessage() const;
 
 private:
-    JsonItem* m_output;
+    DataItem* m_output;
     std::string m_errorMessage = "";
     std::string m_inputString = "";
 
