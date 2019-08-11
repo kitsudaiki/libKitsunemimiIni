@@ -25,8 +25,9 @@ private:
     void parse_test();
     void get_test();
     void set_test();
+    void removeGroup_test();
+    void removeEntry_test();
     void print_test();
-    void setContent_test();
 
     std::string getTestString();
 };
