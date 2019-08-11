@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1] - 2019-08-11
+
+### Changed
+- use items of libKitsuneCommon 0.2.0 instead of the json-lib
+
+### Added
+- remove-methods
+
+### Removed
+- libKitsuneJson as requirement
+
+
 ## [0.1.0] - 2019-08-04
 
 ### Added
