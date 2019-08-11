@@ -28,16 +28,18 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <jsonItems.hpp>
+#include <data_structure/dataItems.hpp>
+
+using Kitsune::Common::DataItem;
+using Kitsune::Common::DataArray;
+using Kitsune::Common::DataValue;
+using Kitsune::Common::DataObject;
 
 namespace Kitsune
 {
 namespace Ini
 {
-
 class IniParserInterface;
-using namespace Kitsune::Json;
-
 }  // namespace Ini
 }  // namespace Kitsune
 }
@@ -73,11 +75,11 @@ YY_DECL;
 %token <int> NUMBER "number"
 %token <float> FLOAT "float"
 
-%type <JsonObject*> grouplist
+%type <DataObject*> grouplist
 %type <std::string> groupheader
-%type <JsonObject*> itemlist
-%type <JsonItem*> itemValue
-%type <JsonItem*> identifierlist
+%type <DataObject*> itemlist
+%type <DataItem*> itemValue
+%type <DataItem*> identifierlist
 
 %%
 %start startpoint;
@@ -98,7 +100,7 @@ grouplist:
 |
     groupheader linebreaks itemlist
     {
-        JsonObject* newMap = new JsonObject();
+        DataObject* newMap = new DataObject();
         newMap->insert($1, $3);
         $$ = newMap;
     }
@@ -118,7 +120,7 @@ itemlist:
 |
     "identifier" "=" itemValue linebreaks
     {
-        JsonObject* newMap = new JsonObject();
+        DataObject* newMap = new DataObject();
         newMap->insert($1, $3);
         $$ = newMap;
     }
@@ -126,7 +128,7 @@ itemlist:
 itemValue:
     "identifier"
     {
-        $$ = new JsonValue($1);
+        $$ = new DataValue($1);
     }
 |
     identifierlist
@@ -136,32 +138,32 @@ itemValue:
 |
     "string"
     {
-        $$ = new JsonValue(driver.removeQuotes($1));
+        $$ = new DataValue(driver.removeQuotes($1));
     }
 |
     "number"
     {
-        $$ = new JsonValue($1);
+        $$ = new DataValue($1);
     }
 |
     "float"
     {
-        $$ = new JsonValue($1);
+        $$ = new DataValue($1);
     }
 
 
 identifierlist:
     identifierlist "," "identifier"
     {
-        JsonArray* array = dynamic_cast<JsonArray*>($1);
-        array->append(new JsonValue($3));
+        DataArray* array = dynamic_cast<DataArray*>($1);
+        array->append(new DataValue($3));
         $$ = $1;
     }
 |
     "identifier"
     {
-        JsonArray* tempItem = new JsonArray();
-        tempItem->append(new JsonValue($1));
+        DataArray* tempItem = new DataArray();
+        tempItem->append(new DataValue($1));
         $$ = tempItem;
     }
 

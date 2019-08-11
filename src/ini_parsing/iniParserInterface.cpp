@@ -84,10 +84,10 @@ IniParserInterface::removeQuotes(std::string input)
 /**
  * Is called for the parser after successfully parsing the input-string
  *
- * @param output parser-output as Json::JsonArray
+ * @param output parser-output as Common::DataArray
  */
 void
-IniParserInterface::setOutput(JsonItem *output)
+IniParserInterface::setOutput(DataItem *output)
 {
      m_output = output;
 }
@@ -95,9 +95,9 @@ IniParserInterface::setOutput(JsonItem *output)
 /**
  * getter for the json-output of the parser
  *
- * @return parser-output as Json::JsonArray
+ * @return parser-output as Common::DataArray
  */
-JsonItem*
+DataItem*
 IniParserInterface::getOutput() const
 {
     return m_output;

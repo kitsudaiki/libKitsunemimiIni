@@ -9,9 +9,7 @@
 
 #include "iniItem_test.hpp"
 #include <iniItem.hpp>
-#include <jsonItems.hpp>
-
-using namespace Kitsune::Json;
+#include <data_structure/dataItems.hpp>
 
 namespace Kitsune
 {
@@ -19,7 +17,7 @@ namespace Ini
 {
 
 IniItem_Test::IniItem_Test()
-    : Kitsune::CommonTest("IniItem_Test")
+    : Kitsune::Common::Test("IniItem_Test")
 {
     parse_test();
     get_test();
