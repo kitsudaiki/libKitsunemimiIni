@@ -28,7 +28,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <data_structure/dataItems.hpp>
+#include <data_structure/data_items.h>
 
 using Kitsune::Common::DataItem;
 using Kitsune::Common::DataArray;
@@ -51,7 +51,7 @@ class IniParserInterface;
 
 %code
 {
-#include <ini_parsing/iniParserInterface.hpp>
+#include <ini_parsing/ini_parser_interface.h>
 # undef YY_DECL
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)

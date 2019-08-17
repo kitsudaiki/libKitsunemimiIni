@@ -1,5 +1,5 @@
 /**
- *  @file    iniItem_test.cpp
+ *  @file    ini_item_test.cpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,9 +7,9 @@
  *  MIT License
  */
 
-#include "iniItem_test.hpp"
-#include <iniItem.hpp>
-#include <data_structure/dataItems.hpp>
+#include "ini_item_test.h"
+#include <ini_item.h>
+#include <data_structure/data_items.h>
 
 namespace Kitsune
 {

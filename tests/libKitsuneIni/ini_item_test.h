@@ -1,5 +1,5 @@
 /**
- *  @file    iniItem_test.hpp
+ *  @file    ini_item_test.h
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,16 +7,17 @@
  *  MIT License
  */
 
-#ifndef PARSERTEST_HPP
-#define PARSERTEST_HPP
+#ifndef PARSERTEST_H
+#define PARSERTEST_H
 
-#include <testing/test.hpp>
+#include <testing/test.h>
 
 namespace Kitsune
 {
 namespace Ini
 {
-class IniItem_Test : public Kitsune::Common::Test
+class IniItem_Test
+        : public Kitsune::Common::Test
 {
 public:
     IniItem_Test();
@@ -35,4 +36,4 @@ private:
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // PARSERTEST_HPP
+#endif // PARSERTEST_H
