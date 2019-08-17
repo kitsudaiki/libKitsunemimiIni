@@ -1,5 +1,5 @@
 /**
- *  @file    iniParserInterface.hpp
+ *  @file    ini_parser_interface.h
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,14 +7,14 @@
  *  MIT License
  */
 
-#ifndef INIPARSERINTERFACE_HPP
-#define INIPARSERINTERFACE_HPP
+#ifndef INIPARSERINTERFACE_H
+#define INIPARSERINTERFACE_H
 
 #include <vector>
 #include <string>
 #include <string>
 #include <map>
-#include <data_structure/dataItems.hpp>
+#include <data_structure/data_items.h>
 
 #include <iostream>
 
@@ -61,4 +61,4 @@ private:
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // INIPARSERINTERFACE_HPP
+#endif // INIPARSERINTERFACE_H

@@ -7,7 +7,7 @@
  *  MIT License
  */
 
-#include <libKitsuneIni/iniItem_test.hpp>
+#include <libKitsuneIni/ini_item_test.h>
 
 int main()
 {

@@ -1,5 +1,5 @@
 ﻿/**
- *  @file    iniItem.hpp
+ *  @file    ini_item.h
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#ifndef INIITEM_HPP
-#define INIITEM_HPP
+#ifndef INIITEM_H
+#define INIITEM_H
 
 #include <utility>
 #include <string>
@@ -77,4 +77,4 @@ private:
 }  // namespace Ini
 }  // namespace Kitsune
 
-#endif // INIITEM_HPP
+#endif // INIITEM_H

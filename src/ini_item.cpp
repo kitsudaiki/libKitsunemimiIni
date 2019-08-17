@@ -1,5 +1,5 @@
 /**
- *  @file    iniItem.cpp
+ *  @file    ini_item.cpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,10 +7,10 @@
  *  MIT License
  */
 
-#include "iniItem.hpp"
+#include "ini_item.h"
 
-#include <data_structure/dataItems.hpp>
-#include <ini_parsing/iniParserInterface.hpp>
+#include <data_structure/data_items.h>
+#include <ini_parsing/ini_parser_interface.h>
 
 using Kitsune::Common::DataItem;
 using Kitsune::Common::DataArray;
@@ -52,7 +52,7 @@ IniItem::parse(const std::string &content,
     pair<std::string, bool> result;
     IniParserInterface parser(traceParsing);
 
-    // parse ini-template into a json-tree
+    // parse ini-template into a data-tree
     result.second = parser.parse(content);
 
     // process a failure

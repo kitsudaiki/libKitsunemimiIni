@@ -1,5 +1,5 @@
 /**
- *  @file    iniParserInterface.cpp
+ *  @file    ini_parser_interface.cpp
  *
  *  @author  Tobias Anker
  *  Contact: tobias.anker@kitsunemimi.moe
@@ -7,8 +7,8 @@
  *  MIT License
  */
 
-#include <ini_parsing/iniParserInterface.hpp>
-#include <iniParser.hpp>
+#include <ini_parsing/ini_parser_interface.h>
+#include <ini_parser.h>
 
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
@@ -93,7 +93,7 @@ IniParserInterface::setOutput(DataItem *output)
 }
 
 /**
- * getter for the json-output of the parser
+ * getter for the data-output of the parser
  *
  * @return parser-output as Common::DataArray
  */
