@@ -9,7 +9,7 @@
 
 #include "ini_item.h"
 
-#include <data_structure/data_items.h>
+#include <common_items/data_items.h>
 #include <ini_parsing/ini_parser_interface.h>
 
 using Kitsune::Common::DataItem;
@@ -262,7 +262,7 @@ std::string IniItem::print()
             else
             {
                 // print simple items
-                itItem->second->print(&output);
+                itItem->second->print(false, &output);
             }
 
             output.append("\n");

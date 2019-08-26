@@ -28,7 +28,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <data_structure/data_items.h>
+#include <common_items/data_items.h>
 
 using Kitsune::Common::DataItem;
 using Kitsune::Common::DataArray;

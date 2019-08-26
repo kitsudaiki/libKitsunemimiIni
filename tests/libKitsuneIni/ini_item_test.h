@@ -10,14 +10,14 @@
 #ifndef PARSERTEST_H
 #define PARSERTEST_H
 
-#include <testing/test.h>
+#include <testing/unit_test.h>
 
 namespace Kitsune
 {
 namespace Ini
 {
 class IniItem_Test
-        : public Kitsune::Common::Test
+        : public Kitsune::Common::UnitTest
 {
 public:
     IniItem_Test();
