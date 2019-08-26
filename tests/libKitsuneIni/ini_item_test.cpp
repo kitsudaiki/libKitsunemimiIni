@@ -9,7 +9,7 @@
 
 #include "ini_item_test.h"
 #include <ini_item.h>
-#include <data_structure/data_items.h>
+#include <common_items/data_items.h>
 
 namespace Kitsune
 {
@@ -17,7 +17,7 @@ namespace Ini
 {
 
 IniItem_Test::IniItem_Test()
-    : Kitsune::Common::Test("IniItem_Test")
+    : Kitsune::Common::UnitTest("IniItem_Test")
 {
     parse_test();
     get_test();
