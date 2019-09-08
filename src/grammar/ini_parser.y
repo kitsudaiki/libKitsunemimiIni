@@ -33,7 +33,7 @@
 using Kitsune::Common::DataItem;
 using Kitsune::Common::DataArray;
 using Kitsune::Common::DataValue;
-using Kitsune::Common::DataObject;
+using Kitsune::Common::DataMap;
 
 namespace Kitsune
 {
@@ -75,9 +75,9 @@ YY_DECL;
 %token <int> NUMBER "number"
 %token <float> FLOAT "float"
 
-%type <DataObject*> grouplist
+%type <DataMap*> grouplist
 %type <std::string> groupheader
-%type <DataObject*> itemlist
+%type <DataMap*> itemlist
 %type <DataItem*> itemValue
 %type <DataItem*> identifierlist
 
@@ -100,7 +100,7 @@ grouplist:
 |
     groupheader linebreaks itemlist
     {
-        DataObject* newMap = new DataObject();
+        DataMap* newMap = new DataMap();
         newMap->insert($1, $3);
         $$ = newMap;
     }
@@ -120,7 +120,7 @@ itemlist:
 |
     "identifier" "=" itemValue linebreaks
     {
-        DataObject* newMap = new DataObject();
+        DataMap* newMap = new DataMap();
         newMap->insert($1, $3);
         $$ = newMap;
     }

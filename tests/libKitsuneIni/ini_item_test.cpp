@@ -68,7 +68,7 @@ IniItem_Test::set_test()
 
     UNITTEST(object.set("hmmm", "poi", "asdf", true), true);
 
-    std::string get2= object.get("hmmm", "poi")->toValue()->toString();
+    std::string get2= object.get("hmmm", "poi")->toValue()->getString();
     UNITTEST(get2, "asdf");
 }
 

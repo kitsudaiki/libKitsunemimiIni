@@ -15,7 +15,7 @@
 using Kitsune::Common::DataItem;
 using Kitsune::Common::DataArray;
 using Kitsune::Common::DataValue;
-using Kitsune::Common::DataObject;
+using Kitsune::Common::DataMap;
 
 namespace Kitsune
 {
@@ -27,7 +27,7 @@ namespace Ini
  */
 IniItem::IniItem()
 {
-    m_content = new DataObject();
+    m_content = new DataMap();
 }
 
 /**
@@ -192,9 +192,9 @@ IniItem::set(const std::string &group,
     // if group doesn't exist, create the group with the new content
     if(groupContent == nullptr)
     {
-        groupContent = new DataObject();
-        groupContent->toObject()->insert(item, value);
-        m_content->toObject()->insert(group, groupContent);
+        groupContent = new DataMap();
+        groupContent->toMap()->insert(item, value);
+        m_content->toMap()->insert(group, groupContent);
         return true;
     }
 
@@ -204,7 +204,7 @@ IniItem::set(const std::string &group,
     if(groupItem == nullptr
             || force)
     {
-        groupContent->toObject()->insert(item, value, force);
+        groupContent->toMap()->insert(item, value, force);
         return true;
     }
 
@@ -225,7 +225,7 @@ std::string IniItem::print()
     std::string output = "";
 
     // iterate over all groups
-    std::map<std::string, DataItem*> completeContent = m_content->toObject()->m_objects;
+    std::map<std::string, DataItem*> completeContent = m_content->toMap()->m_map;
     std::map<std::string, DataItem*>::iterator itGroup;
     for(itGroup = completeContent.begin();
         itGroup != completeContent.end();
@@ -237,7 +237,7 @@ std::string IniItem::print()
         output.append("]\n");
 
         // iterate over group-content
-        std::map<std::string, DataItem*> groupContent = itGroup->second->toObject()->m_objects;
+        std::map<std::string, DataItem*> groupContent = itGroup->second->toMap()->m_map;
         map<string, DataItem*>::iterator itItem;
         for(itItem = groupContent.begin();
             itItem != groupContent.end();
@@ -256,13 +256,13 @@ std::string IniItem::print()
                     if(i != 0) {
                         output.append(", ");
                     }
-                    output.append(array.at(i)->print());
+                    output.append(array.at(i)->toString());
                 }
             }
             else
             {
                 // print simple items
-                itItem->second->print(false, &output);
+                itItem->second->toString(false, &output);
             }
 
             output.append("\n");
