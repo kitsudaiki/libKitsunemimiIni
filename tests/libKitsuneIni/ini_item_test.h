@@ -10,6 +10,7 @@
 #ifndef PARSERTEST_H
 #define PARSERTEST_H
 
+#include <algorithm>
 #include <testing/unit_test.h>
 
 namespace Kitsune
