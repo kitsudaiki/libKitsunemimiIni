@@ -50,7 +50,7 @@ IniItem_Test::get_test()
     std::string get1 = object.get("DEFAULT", "x")->toValue()->toString();
     UNITTEST(get1, "2");
 
-    std::string get2= object.get("hmmm", "poi")->toValue()->toString();
+    std::string get2= object.get("hmmm", "poi_poi")->toValue()->toString();
     UNITTEST(get2, "1.300000");
 }
 
@@ -66,9 +66,9 @@ IniItem_Test::set_test()
     UNITTEST(object.set("hmmm2", "poi", "asdf"), true);
     UNITTEST(object.set("hmmm2", "poi", "asdf"), false);
 
-    UNITTEST(object.set("hmmm", "poi", "asdf", true), true);
+    UNITTEST(object.set("hmmm", "poi_poi", "asdf", true), true);
 
-    std::string get2= object.get("hmmm", "poi")->toValue()->getString();
+    std::string get2= object.get("hmmm", "poi_poi")->toValue()->getString();
     UNITTEST(get2, "asdf");
 }
 
@@ -85,7 +85,8 @@ IniItem_Test::removeGroup_test()
     UNITTEST(object.removeGroup("hmmm"), false);
 
     std::string compare = "[DEFAULT]\n"
-                          "asdf = \"asdfasdf\"\n"
+                          "asdf = \"asdf.asdf\"\n"
+                          "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
                           "x = 2\n"
                           "\n";
 
@@ -106,13 +107,27 @@ IniItem_Test::removeEntry_test()
     UNITTEST(object.removeEntry("fail", "x"), false);
 
     std::string compare = "[DEFAULT]\n"
-                          "asdf = \"asdfasdf\"\n"
+                          "asdf = \"asdf.asdf\"\n"
+                          "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
                           "\n"
                           "[hmmm]\n"
-                          "poi = 1.300000\n"
+                          "poi_poi = 1.300000\n"
                           "\n";
 
     UNITTEST(object.print(), compare);
+}
+
+/**
+ * @brief helper-function for remove characters
+ */
+bool
+isSlash(char c)
+{
+    if(c == '\"') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -125,6 +140,10 @@ IniItem_Test::print_test()
     pair<std::string, bool> result = object.parse(getTestString());
 
     std::string outputStringObjects = object.print();
+    outputStringObjects.erase(std::remove_if(outputStringObjects.begin(),
+                                             outputStringObjects.end(),
+                                             &isSlash),
+                              outputStringObjects.end());
     UNITTEST(outputStringObjects, getTestString());
 }
 
@@ -137,11 +156,12 @@ IniItem_Test::getTestString()
 {
     const std::string testString(
                 "[DEFAULT]\n"
-                "asdf = \"asdfasdf\"\n"
+                "asdf = asdf.asdf\n"
+                "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
                 "\n"
                 "[hmmm]\n"
-                "poi = 1.300000\n"
+                "poi_poi = 1.300000\n"
                 "\n");
     return testString;
 }

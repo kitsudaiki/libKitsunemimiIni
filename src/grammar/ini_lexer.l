@@ -23,7 +23,7 @@ Kitsune::Ini::location iniloc;
 
 %option noyywrap nounput batch debug yylineno prefix="ini"
 
-id    [a-zA-Z][a-zA-Z_0-9]*
+id    [a-zA-Z_0-9|\-|.]*
 int   -?([0-9]+)
 blank [ \t]
 
