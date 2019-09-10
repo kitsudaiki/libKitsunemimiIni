@@ -72,6 +72,7 @@ YY_DECL;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <std::string> STRING "string"
+%token <std::string> STRING_PLN "string_pln"
 %token <int> NUMBER "number"
 %token <float> FLOAT "float"
 
@@ -131,6 +132,11 @@ itemValue:
         $$ = new DataValue($1);
     }
 |
+    "string_pln"
+    {
+        $$ = new DataValue($1);
+    }
+|
     identifierlist
     {
         $$ = $1;
@@ -153,14 +159,28 @@ itemValue:
 
 
 identifierlist:
-    identifierlist "," "identifier"
+    identifierlist "," "string"
+    {
+        DataArray* array = dynamic_cast<DataArray*>($1);
+        array->append(new DataValue(driver.removeQuotes($3)));
+        $$ = $1;
+    }
+|
+    identifierlist "," "string_pln"
     {
         DataArray* array = dynamic_cast<DataArray*>($1);
         array->append(new DataValue($3));
         $$ = $1;
     }
 |
-    "identifier"
+    "string"
+    {
+        DataArray* tempItem = new DataArray();
+        tempItem->append(new DataValue(driver.removeQuotes($1)));
+        $$ = tempItem;
+    }
+|
+    "string_pln"
     {
         DataArray* tempItem = new DataArray();
         tempItem->append(new DataValue($1));
