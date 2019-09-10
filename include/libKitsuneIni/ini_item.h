@@ -14,10 +14,6 @@
 #include <vector>
 #include <map>
 
-using std::string;
-using std::map;
-using std::pair;
-
 namespace Kitsune
 {
 namespace Common {
@@ -34,11 +30,14 @@ public:
     IniItem();
     ~IniItem();
 
-    pair<std::string, bool> parse(const string &content,
-                                  const bool traceParsing = false);
+    std::pair<bool, std::string> parse(const std::string &content,
+                                       const bool traceParsing = false);
 
+    // get
     Common::DataItem* get(const std::string& group,
                           const std::string& item);
+
+    // set
     bool set(const std::string& group,
              const std::string& item,
              const std::string value,
@@ -56,17 +55,17 @@ public:
              const std::vector<std::string> value,
              const bool force=false);
 
+    // remove
     bool removeGroup(const std::string& group);
     bool removeEntry(const std::string& group,
                      const std::string& item);
 
-    std::string print();
+    // output
+    std::string toString();
 
-    void setContent(Common::DataItem* item);
-
-private:
     Common::DataItem* m_content = nullptr;
 
+private:
     bool set(const std::string& group,
              const std::string& item,
              Common::DataItem* value,
