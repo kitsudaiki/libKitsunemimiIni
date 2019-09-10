@@ -1,10 +1,9 @@
 /**
  *  @file    ini_item_test.cpp
  *
- *  @author  Tobias Anker
- *  Contact: tobias.anker@kitsunemimi.moe
+ *  @author  Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
- *  MIT License
+ *  @copyright MIT License
  */
 
 #include "ini_item_test.h"
@@ -35,6 +34,7 @@ IniItem_Test::parse_test()
 {
     IniItem object;
     pair<std::string, bool> result = object.parse(getTestString());
+
     UNITTEST(result.second, true);
 }
 
