@@ -40,26 +40,33 @@ IniItem::~IniItem()
 }
 
 /**
- * @brief IniObject::parse
- * @param content
- * @return
+ * @brief parse the content of an ini-file
+ *
+ * @param content content of an ini-file as string
+ * @param traceParsing trace parser-actions for debugging only (defualt: false)
+ *
+ * @return pair of bool and string
+ *         success: first is true, second is empty-string
+ *         fail: first is false, second is error-message
  */
-pair<std::string, bool>
+std::pair<bool, std::string>
 IniItem::parse(const std::string &content,
                const bool traceParsing)
 {
-    pair<std::string, bool> result;
+    std::pair<bool, std::string> result;
     IniParserInterface parser(traceParsing);
 
     // parse ini-template into a data-tree
-    result.second = parser.parse(content);
+    result.first = parser.parse(content);
 
     // process a failure
-    if(result.second == false) {
-        result.first = parser.getErrorMessage();
+    if(result.first == false)
+    {
+        result.second = parser.getErrorMessage();
         return result;
     }
 
+    // delete old content, if exist and get the new one from the parser
     if(m_content != nullptr) {
         delete m_content;
     }
@@ -69,10 +76,12 @@ IniItem::parse(const std::string &content,
 }
 
 /**
- * @brief IniObject::get
- * @param group
- * @param item
- * @return
+ * @brief get a value from the ini-item
+ *
+ * @param group group-name
+ * @param item item-key-name
+ *
+ * @return requested value as data-item
  */
 Common::DataItem*
 IniItem::get(const std::string &group,
@@ -86,8 +95,14 @@ IniItem::get(const std::string &group,
 }
 
 /**
- * @brief IniItem::set
- * @return
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value string as new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
  */
 bool
 IniItem::set(const std::string &group,
@@ -99,8 +114,14 @@ IniItem::set(const std::string &group,
 }
 
 /**
- * @brief IniItem::set
- * @return
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value integer as new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
  */
 bool
 IniItem::set(const std::string &group,
@@ -112,8 +133,14 @@ IniItem::set(const std::string &group,
 }
 
 /**
- * @brief IniItem::set
- * @return
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value float new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
  */
 bool
 IniItem::set(const std::string &group,
@@ -125,8 +152,14 @@ IniItem::set(const std::string &group,
 }
 
 /**
- * @brief IniItem::set
- * @return
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value string-list as new value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
  */
 bool
 IniItem::set(const std::string &group,
@@ -144,9 +177,11 @@ IniItem::set(const std::string &group,
 }
 
 /**
- * @brief IniItem::removeGroup
- * @param group
- * @return
+ * @brief remove an entire group together with all its items from the ini-item
+ *
+ * @param group group-name
+ *
+ * @return false, if group doesn't exist, else true
  */
 bool
 IniItem::removeGroup(const std::string &group)
@@ -155,10 +190,12 @@ IniItem::removeGroup(const std::string &group)
 }
 
 /**
- * @brief IniItem::removeEntry
- * @param group
- * @param item
- * @return
+ * @brief remove an item for the ini-item
+ *
+ * @param group group-name
+ * @param item item-key-name
+ *
+ * @return false, if group or item doesn't exist, else true
  */
 bool
 IniItem::removeEntry(const std::string &group,
@@ -173,12 +210,14 @@ IniItem::removeEntry(const std::string &group,
 }
 
 /**
- * @brief IniItem::set
- * @param group
- * @param item
- * @param value
- * @param force
- * @return
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
  */
 bool
 IniItem::set(const std::string &group,
@@ -216,10 +255,11 @@ IniItem::set(const std::string &group,
 }
 
 /**
- * @brief IniObject::print
- * @return
+ * @brief convert the content of the ini-item into a string-output to write it into a new ini-file
+ *
+ * @return converted string
  */
-std::string IniItem::print()
+std::string IniItem::toString()
 {
     std::string output = "";
 
@@ -271,19 +311,6 @@ std::string IniItem::print()
     }
 
     return output;
-}
-
-/**
- * @brief IniItem::setContent
- * @param item
- */
-void
-IniItem::setContent(DataItem *item)
-{
-    if(m_content != nullptr) {
-        delete m_content;
-    }
-    m_content = item;
 }
 
 }  // namespace Ini

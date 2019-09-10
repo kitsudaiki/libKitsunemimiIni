@@ -33,9 +33,9 @@ void
 IniItem_Test::parse_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
-    UNITTEST(result.second, true);
+    UNITTEST(result.first, true);
 }
 
 /**
@@ -45,7 +45,7 @@ void
 IniItem_Test::get_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
     std::string get1 = object.get("DEFAULT", "x")->toValue()->toString();
     UNITTEST(get1, "2");
@@ -61,7 +61,7 @@ void
 IniItem_Test::set_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(object.set("hmmm2", "poi", "asdf"), true);
     UNITTEST(object.set("hmmm2", "poi", "asdf"), false);
@@ -79,7 +79,7 @@ void
 IniItem_Test::removeGroup_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(object.removeGroup("hmmm"), true);
     UNITTEST(object.removeGroup("hmmm"), false);
@@ -90,7 +90,7 @@ IniItem_Test::removeGroup_test()
                           "x = 2\n"
                           "\n";
 
-    UNITTEST(object.print(), compare);
+    UNITTEST(object.toString(), compare);
 }
 
 /**
@@ -100,7 +100,7 @@ void
 IniItem_Test::removeEntry_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(object.removeEntry("DEFAULT", "x"), true);
     UNITTEST(object.removeEntry("DEFAULT", "x"), false);
@@ -114,7 +114,7 @@ IniItem_Test::removeEntry_test()
                           "poi_poi = 1.300000\n"
                           "\n";
 
-    UNITTEST(object.print(), compare);
+    UNITTEST(object.toString(), compare);
 }
 
 /**
@@ -137,9 +137,9 @@ void
 IniItem_Test::print_test()
 {
     IniItem object;
-    pair<std::string, bool> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
-    std::string outputStringObjects = object.print();
+    std::string outputStringObjects = object.toString();
     outputStringObjects.erase(std::remove_if(outputStringObjects.begin(),
                                              outputStringObjects.end(),
                                              &isSlash),
