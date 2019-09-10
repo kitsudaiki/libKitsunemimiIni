@@ -23,7 +23,7 @@ Kitsune::Ini::location iniloc;
 
 %option noyywrap nounput batch debug yylineno prefix="ini"
 
-id    [a-zA-Z_0-9|\-|.]*
+id    [a-zA-Z_0-9]*
 int   -?([0-9]+)
 blank [ \t]
 
@@ -52,6 +52,7 @@ blank [ \t]
     return Kitsune::Ini::IniParser::make_STRING(yytext, iniloc);
 }
 
+
 {int}      {
     errno = 0;
     long length = strtol(yytext, NULL, 10);
@@ -70,6 +71,12 @@ blank [ \t]
 }
 
 {id}       return Kitsune::Ini::IniParser::make_IDENTIFIER(yytext, iniloc);
+
+
+[a-zA-Z_0-9|\-|.]* {
+    return Kitsune::Ini::IniParser::make_STRING_PLN(yytext, iniloc);
+}
+
 .          driver.error(iniloc, "invalid character");
 <<EOF>>    return Kitsune::Ini::IniParser::make_END(iniloc);
 
