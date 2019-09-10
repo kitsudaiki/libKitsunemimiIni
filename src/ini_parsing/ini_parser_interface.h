@@ -1,10 +1,9 @@
 /**
  *  @file    ini_parser_interface.h
  *
- *  @author  Tobias Anker
- *  Contact: tobias.anker@kitsunemimi.moe
+ *  @author  Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
- *  MIT License
+ *  @copyright MIT License
  */
 
 #ifndef INIPARSERINTERFACE_H
