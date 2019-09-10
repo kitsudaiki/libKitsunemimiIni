@@ -44,7 +44,7 @@ cd $LIB_KITSUNE_INI_DIR
 /usr/bin/make -j4
 
 # copy build-result and include-files into the result-directory
-cp "$LIB_KITSUNE_INI_DIR/src/libKitsuneIni.so.0.1.2" "$RESULT_DIR/"
+cp "$LIB_KITSUNE_INI_DIR/src/libKitsuneIni.so.0.2.0" "$RESULT_DIR/"
 cp -r "$PARENT_DIR/libKitsuneIni/include" "$RESULT_DIR/"
 
 #-----------------------------------------------------------------------------------------------------------------
@@ -55,6 +55,6 @@ ln -s libKitsuneCommon.so.0.5.1 libKitsuneCommon.so.0.5
 ln -s libKitsuneCommon.so.0.5.1 libKitsuneCommon.so.0
 ln -s libKitsuneCommon.so.0.5.1 libKitsuneCommon.so
 
-ln -s libKitsuneIni.so.0.1.2 libKitsuneIni.so.0.1
-ln -s libKitsuneIni.so.0.1.2 libKitsuneIni.so.0
-ln -s libKitsuneIni.so.0.1.2 libKitsuneIni.so
+ln -s libKitsuneIni.so.0.2.0 libKitsuneIni.so.0.2
+ln -s libKitsuneIni.so.0.2.0 libKitsuneIni.so.0
+ln -s libKitsuneIni.so.0.2.0 libKitsuneIni.so

@@ -3,7 +3,7 @@ QT -= qt core gui
 TARGET = KitsuneIni
 CONFIG += c++14
 TEMPLATE = lib
-VERSION = 0.1.2
+VERSION = 0.2.0
 
 LIBS += -L../../libKitsuneCommon/src -lKitsuneCommon
 LIBS += -L../../libKitsuneCommon/src/debug -lKitsuneCommon

@@ -83,10 +83,10 @@ After running the build-script:
     ├── libKitsuneCommon.so.0.5 -> libKitsuneCommon.so.0.5.1
     ├── libKitsuneCommon.so.0.5.1
     │
-    ├── libKitsuneIni.so -> libKitsuneIni.so.0.3.0
-    ├── libKitsuneIni.so.0 -> libKitsuneIni.so.0.3.0
-    ├── libKitsuneIni.so.0.3 -> libKitsuneIni.so.0.3.0
-    └── libKitsuneIni.so.0.3.0
+    ├── libKitsuneIni.so -> libKitsuneIni.so.0.2.0
+    ├── libKitsuneIni.so.0 -> libKitsuneIni.so.0.2.0
+    ├── libKitsuneIni.so.0.2 -> libKitsuneIni.so.0.2.0
+    └── libKitsuneIni.so.0.2.0
 ```
 
 It create automatic a `build` and `result` directory in the directory, where you have cloned the project. At first it build all into the `build`-directory and after all build-steps are finished, it copy the include directory from the cloned repository and the build library into the `result`-directory. So you have all in one single place.
