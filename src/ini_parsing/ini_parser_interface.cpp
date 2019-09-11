@@ -8,15 +8,18 @@
 
 #include <ini_parsing/ini_parser_interface.h>
 #include <ini_parser.h>
+#include <common_methods/string_methods.h>
 
 # define YY_DECL \
     Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
 YY_DECL;
 
+
 namespace Kitsune
 {
 namespace Ini
 {
+using Common::splitStringByDelimiter;
 
 /**
  * The class is the interface for the bison-generated parser.
@@ -112,19 +115,25 @@ IniParserInterface::getOutput() const
  */
 void
 IniParserInterface::error(const Kitsune::Ini::location& location,
-                             const std::string& message)
+                          const std::string& message)
 {
     // get the broken part of the parsed string
     const uint32_t errorStart = location.begin.column;
     const uint32_t errorLength = location.end.column - location.begin.column;
-    const std::string errorStringPart = m_inputString.substr(errorStart, errorLength);
+    const uint32_t linenumber = location.begin.line;
+
+    const std::vector<std::string> splittedContent = splitStringByDelimiter(m_inputString, '\n');
+
+    // -1 because the number starts for user-readability at 1 instead of 0
+    const std::string errorStringPart = splittedContent[linenumber - 1].substr(errorStart - 1,
+                                                                               errorLength);
 
     // build error-message
-    m_errorMessage =  "error while parsing ini-template \n";
+    m_errorMessage =  "ERROR while parsing ini-formated string \n";
     m_errorMessage += "parser-message: " + message + " \n";
-    m_errorMessage += "line-number: " + std::to_string(location.begin.line) + " \n";
+    m_errorMessage += "line-number: " + std::to_string(linenumber) + " \n";
     m_errorMessage += "position in line: " + std::to_string(location.begin.column) + " \n";
-    m_errorMessage += "broken part in template: \"" + errorStringPart + "\" \n";
+    m_errorMessage += "broken part in string: \"" + errorStringPart + "\" \n";
 }
 
 /**
