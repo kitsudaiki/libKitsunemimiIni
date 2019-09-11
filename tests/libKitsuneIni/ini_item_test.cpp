@@ -36,6 +36,7 @@ IniItem_Test::parse_test()
     std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(result.first, true);
+    std::cout<<"result.second: "<<result.second<<std::endl;
 }
 
 /**
@@ -84,11 +85,12 @@ IniItem_Test::removeGroup_test()
     UNITTEST(object.removeGroup("hmmm"), true);
     UNITTEST(object.removeGroup("hmmm"), false);
 
-    std::string compare = "[DEFAULT]\n"
-                          "asdf = \"asdf.asdf\"\n"
-                          "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
-                          "x = 2\n"
-                          "\n";
+    const std::string compare(
+                "[DEFAULT]\n"
+                "asdf = \"asdf.asdf\"\n"
+                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "x = 2\n"
+                "\n");
 
     UNITTEST(object.toString(), compare);
 }
@@ -106,13 +108,14 @@ IniItem_Test::removeEntry_test()
     UNITTEST(object.removeEntry("DEFAULT", "x"), false);
     UNITTEST(object.removeEntry("fail", "x"), false);
 
-    std::string compare = "[DEFAULT]\n"
-                          "asdf = \"asdf.asdf\"\n"
-                          "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
-                          "\n"
-                          "[hmmm]\n"
-                          "poi_poi = 1.300000\n"
-                          "\n";
+    const std::string compare(
+                "[DEFAULT]\n"
+                "asdf = \"asdf.asdf\"\n"
+                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "\n"
+                "[hmmm]\n"
+                "poi_poi = 1.300000\n"
+                "\n");
 
     UNITTEST(object.toString(), compare);
 }
@@ -139,19 +142,46 @@ IniItem_Test::print_test()
     IniItem object;
     std::pair<bool, std::string> result = object.parse(getTestString());
 
-    std::string outputStringObjects = object.toString();
-    outputStringObjects.erase(std::remove_if(outputStringObjects.begin(),
-                                             outputStringObjects.end(),
-                                             &isSlash),
-                              outputStringObjects.end());
-    UNITTEST(outputStringObjects, getTestString());
+    const std::string outputStringObjects = object.toString();
+
+    const std::string compare(
+                "[DEFAULT]\n"
+                "asdf = \"asdf.asdf\"\n"
+                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "x = 2\n"
+                "\n"
+                "[hmmm]\n"
+                "poi_poi = 1.300000\n"
+                "\n");
+    UNITTEST(outputStringObjects, compare);
+
+
+    // negative test
+    const std::string badString(
+                "[DEFAULT]\n"
+                "asdf = asdf.asdf\n"
+                "id = 550e8400-e29b-11d4-a716-446655440000\n"
+                "x = 2\n"
+                "\n"
+                "[hmmm]\n"
+                "poi.poi = 1.300000\n"
+                "\n");
+    result = object.parse(badString);
+    UNITTEST(result.first, false);
+
+    const std::string compareError("ERROR while parsing ini-formated string \n"
+                                   "parser-message: syntax error \n"
+                                   "line-number: 7 \n"
+                                   "position in line: 1 \n"
+                                   "broken part in string: \"poi.poi\" \n");
+    UNITTEST(result.second, compareError);
 }
 
 /**
  * @brief IniItem_Test::getTestString
  * @return
  */
-std::string
+const std::string
 IniItem_Test::getTestString()
 {
     const std::string testString(

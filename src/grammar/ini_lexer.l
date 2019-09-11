@@ -46,7 +46,7 @@ blank [ \t]
 %}
 
 {blank}+    iniloc.step();
-[\n]        return Kitsune::Ini::IniParser::make_LINEBREAK (iniloc);
+[\n]        {iniloc.lines(1); return Kitsune::Ini::IniParser::make_LINEBREAK (iniloc);}
 "="         return Kitsune::Ini::IniParser::make_EQUAL (iniloc);
 "["         return Kitsune::Ini::IniParser::make_BRACKOPEN (iniloc);
 "]"         return Kitsune::Ini::IniParser::make_BRACKCLOSE (iniloc);

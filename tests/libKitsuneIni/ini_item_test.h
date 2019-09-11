@@ -30,7 +30,7 @@ private:
     void removeEntry_test();
     void print_test();
 
-    std::string getTestString();
+    const std::string getTestString();
 };
 
 }  // namespace Ini
