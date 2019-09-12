@@ -66,9 +66,10 @@ YY_DECL;
     BRACKOPEN "["
     BRACKCLOSE "]"
     COMMA ","
+    COMMENT "#"
 ;
 
-
+%token <std::string> DEFAULTRULE "defaultrule"
 %token <std::string> IDENTIFIER "identifier"
 %token <std::string> STRING "string"
 %token <std::string> STRING_PLN "string_pln"
@@ -186,11 +187,33 @@ identifierlist:
         $$ = tempItem;
     }
 
+commentline:
+   comment  defaultroute  "lbreak"
+   {
+        IniParserInterface::m_outsideComment = true;
+   }
+
+comment:
+   "#"
+   {
+        IniParserInterface::m_outsideComment = false;
+   }
 
 linebreaks:
+   linebreaks "lbreak" commentline
+|
    linebreaks "lbreak"
 |
+   "lbreak" commentline
+|
    "lbreak"
+
+defaultroute:
+   defaultroute "defaultrule"
+|
+   "defaultrule"
+|
+   %empty
 
 %%
 

@@ -33,7 +33,7 @@ void
 IniItem_Test::parse_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::pair<bool, std::string> result = object.parse(getTestString(), true);
 
     UNITTEST(result.first, true);
     std::cout<<"result.second: "<<result.second<<std::endl;
@@ -189,8 +189,9 @@ IniItem_Test::getTestString()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
-                "\n"
+                "\n\n"
                 "[hmmm]\n"
+                "# this is only a simple 0815 testcommit\n\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     return testString;
