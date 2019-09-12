@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [0.2.1] - 2019-09-12
+
+### Fixed
+- error messages in case of an syntax-error while parsing
+- fixed comments in the string while parsing
+
+
 ## [0.2.0] - 2019-09-10
 
 ### Added

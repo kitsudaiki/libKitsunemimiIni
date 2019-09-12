@@ -33,7 +33,7 @@ void
 IniItem_Test::parse_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString(), true);
+    std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(result.first, true);
     std::cout<<"result.second: "<<result.second<<std::endl;
