@@ -49,6 +49,9 @@ public:
                const std::string& message);
     std::string getErrorMessage() const;
 
+    // static variables, which are used in lexer and parser
+    static bool m_outsideComment;
+
 private:
     DataItem* m_output;
     std::string m_errorMessage = "";

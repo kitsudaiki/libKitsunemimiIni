@@ -45,19 +45,16 @@ blank [ \t]
     iniloc.step();
 %}
 
-{blank}+    iniloc.step();
-[\n]        {iniloc.lines(1); return Kitsune::Ini::IniParser::make_LINEBREAK (iniloc);}
-"="         return Kitsune::Ini::IniParser::make_EQUAL (iniloc);
-"["         return Kitsune::Ini::IniParser::make_BRACKOPEN (iniloc);
-"]"         return Kitsune::Ini::IniParser::make_BRACKCLOSE (iniloc);
-","         return Kitsune::Ini::IniParser::make_COMMA (iniloc);
 
-#(\\.|[^"\\])*\n {
-    iniloc.step();
-}
-
+{blank}+    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { iniloc.step();  } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+[\n]        {iniloc.lines(1); return Kitsune::Ini::IniParser::make_LINEBREAK (iniloc); }
+"="         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_EQUAL (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"["         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_BRACKOPEN (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"]"         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_BRACKCLOSE (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+","         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_COMMA (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"#"         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_COMMENT (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 \"(\\.|[^"\\])*\" {
-    return Kitsune::Ini::IniParser::make_STRING(yytext, iniloc);
+            if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_STRING(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
 
@@ -70,22 +67,22 @@ blank [ \t]
     {
         driver.error(iniloc, "integer is out of range");
     }
-    return Kitsune::Ini::IniParser::make_NUMBER (length, iniloc);
+    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
 {int}+"."{int}*	{
     float value = atof( yytext );
-    return Kitsune::Ini::IniParser::make_FLOAT(value, iniloc);
+    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-{id}       return Kitsune::Ini::IniParser::make_IDENTIFIER(yytext, iniloc);
+{id} if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_IDENTIFIER(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 
 
 [a-zA-Z_0-9|\-|.]* {
-    return Kitsune::Ini::IniParser::make_STRING_PLN(yytext, iniloc);
+    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_STRING_PLN(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-.          driver.error(iniloc, "invalid character");
+.          if(Kitsune::Ini::IniParserInterface::m_outsideComment) { driver.error(iniloc, "invalid character"); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 <<EOF>>    return Kitsune::Ini::IniParser::make_END(iniloc);
 
 %%

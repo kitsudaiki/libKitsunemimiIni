@@ -21,6 +21,8 @@ namespace Ini
 {
 using Common::splitStringByDelimiter;
 
+bool IniParserInterface::m_outsideComment = true;
+
 /**
  * The class is the interface for the bison-generated parser.
  * It starts the parsing-process and store the returned values.
