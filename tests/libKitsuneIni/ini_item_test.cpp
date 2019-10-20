@@ -7,8 +7,8 @@
  */
 
 #include "ini_item_test.h"
-#include <ini_item.h>
-#include <common_items/data_items.h>
+#include <libKitsuneIni/ini_item.h>
+#include <libKitsuneCommon/common_items/data_items.h>
 
 namespace Kitsune
 {
