@@ -6,9 +6,9 @@
  *  @copyright MIT License
  */
 
-#include "ini_item.h"
+#include <libKitsuneIni/ini_item.h>
 
-#include <common_items/data_items.h>
+#include <libKitsuneCommon/common_items/data_items.h>
 #include <ini_parsing/ini_parser_interface.h>
 
 using Kitsune::Common::DataItem;

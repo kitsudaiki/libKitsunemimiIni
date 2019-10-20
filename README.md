@@ -67,7 +67,7 @@ IMPORTANT: All my projects are only tested on Linux.
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsuneCommon | 0.5.1 |  https://github.com/tobiasanker/libKitsuneCommon.git
+libKitsuneCommon | v0.6.0 |  https://github.com/tobiasanker/libKitsuneCommon.git
 
 
 ### build library
@@ -106,12 +106,10 @@ After running the build-script:
     │   └── libKitsuneIni
     │       └── ...
     │
-    ├── libKitsuneCommon.so -> libKitsuneCommon.so.0.5.1
-    ├── libKitsuneCommon.so.0 -> libKitsuneCommon.so.0.5.1
-    ├── libKitsuneCommon.so.0.5 -> libKitsuneCommon.so.0.5.1
-    ├── libKitsuneCommon.so.0.5.1
+    ├── libKitsuneCommon.so.0 -> libKitsuneCommon.so.0.6.0
+    ├── libKitsuneCommon.so.0.6 -> libKitsuneCommon.so.0.6.0
+    ├── libKitsuneCommon.so.0.6.0
     │
-    ├── libKitsuneIni.so -> libKitsuneIni.so.0.2.1
     ├── libKitsuneIni.so.0 -> libKitsuneIni.so.0.2.1
     ├── libKitsuneIni.so.0.2 -> libKitsuneIni.so.0.2.1
     └── libKitsuneIni.so.0.2.1

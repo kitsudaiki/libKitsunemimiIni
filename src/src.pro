@@ -8,10 +8,10 @@ VERSION = 0.2.2
 LIBS += -L../../libKitsuneCommon/src -lKitsuneCommon
 LIBS += -L../../libKitsuneCommon/src/debug -lKitsuneCommon
 LIBS += -L../../libKitsuneCommon/src/release -lKitsuneCommon
-INCLUDEPATH += ../../libKitsuneCommon/include/libKitsuneCommon
+INCLUDEPATH += ../../libKitsuneCommon/include
 
 INCLUDEPATH += $$PWD \
-               $$PWD/../include/libKitsuneIni
+               $$PWD/../include
 
 SOURCES += \
     ini_parsing/ini_parser_interface.cpp \
