@@ -36,7 +36,9 @@ IniItem_Test::parse_test()
     std::pair<bool, std::string> result = object.parse(getTestString());
 
     UNITTEST(result.first, true);
-    std::cout<<"result.second: "<<result.second<<std::endl;
+    if(result.first == false) {
+        std::cout<<"result.second: "<<result.second<<std::endl;
+    }
 }
 
 /**
@@ -87,8 +89,8 @@ IniItem_Test::removeGroup_test()
 
     const std::string compare(
                 "[DEFAULT]\n"
-                "asdf = \"asdf.asdf\"\n"
-                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "asdf = asdf.asdf\n"
+                "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
                 "\n");
 
@@ -110,8 +112,8 @@ IniItem_Test::removeEntry_test()
 
     const std::string compare(
                 "[DEFAULT]\n"
-                "asdf = \"asdf.asdf\"\n"
-                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "asdf = asdf.asdf\n"
+                "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "\n"
                 "[hmmm]\n"
                 "poi_poi = 1.300000\n"
@@ -146,8 +148,8 @@ IniItem_Test::print_test()
 
     const std::string compare(
                 "[DEFAULT]\n"
-                "asdf = \"asdf.asdf\"\n"
-                "id = \"550e8400-e29b-11d4-a716-446655440000\"\n"
+                "asdf = asdf.asdf\n"
+                "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
                 "\n"
                 "[hmmm]\n"
