@@ -122,12 +122,12 @@ Tested on Debian and Ubuntu. If you use Centos, Arch, etc and the build-script f
 
 ## Usage
 
-**Header-file:** `ini_item.h`
+**Header-file:** `libKitsuneIni/ini_item.h`
 
 The `IniItem`-class is the handler for the ini-file-content. The functions in the header should be really self-explaned, if something is unclear, see the following example or the comments in the cpp-file.
 
 ```cpp
-#include <ini_item.h>
+#include <libKitsuneIni/ini_item.h>
 
 // short test-string for demonstration. 
 const std::string testString(
