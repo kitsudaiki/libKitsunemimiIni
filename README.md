@@ -1,8 +1,8 @@
-# libKitsuneIni
+# libKitsunemimiIni
 
-![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/tobiasanker/libKitsuneIni?label=build%20and%20test&style=flat-square)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/tobiasanker/libKitsuneIni?label=version&style=flat-square)
-![GitHub](https://img.shields.io/github/license/tobiasanker/libKitsuneIni?style=flat-square)
+![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/tobiasanker/libKitsunemimiIni?label=build%20and%20test&style=flat-square)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/tobiasanker/libKitsunemimiIni?label=version&style=flat-square)
+![GitHub](https://img.shields.io/github/license/tobiasanker/libKitsunemimiIni?style=flat-square)
 ![C++Version](https://img.shields.io/badge/c%2B%2B-14-blue?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Linux--x64-lightgrey?style=flat-square)
 
@@ -16,11 +16,11 @@ Here some common information about my projects and my code-styling. It's not com
 
 ### About my kitsune libraries
 
-1. All my libraries beginning with `libKitsune`, because I needed a naming to identify my own libraries and I decided to use `Kitsune` as name, because Kitsunemimi are moe. ;)
+1. All my libraries beginning with `libKitsunemimi`, because I needed a naming to identify my own libraries and I decided to use `Kitsunemimi` as name, because Kitsunemimi are moe. ;)
 
-2. The namespace of the code within the libraries is identically to the name of the library. So for example all content of `libKitsuneCommon` has the namespace `Kitsune::Common`.
+2. The namespace of the code within the libraries is identically to the name of the library. So for example all content of `libKitsunemimiCommon` has the namespace `Kitsunemimi::Common`.
 
-3. If you only want to use the library, beside the binary you only ne the public methods and variables in the header-files, which are located in the `include`-directory of each `libKitsune`-repo. I try my best to make these as small and self-explaining, as possible. 
+3. If you only want to use the library, beside the binary you only ne the public methods and variables in the header-files, which are located in the `include`-directory of each `libKitsunemimi`-repo. I try my best to make these as small and self-explaining, as possible. 
 
 ### About my repositories in general
 
@@ -63,11 +63,11 @@ This are the version I have installed under Debian Stable via apt. Some older or
 
 IMPORTANT: All my projects are only tested on Linux. 
 
-#### Kitsune-repositories
+#### Kitsunemimi-repositories
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsuneCommon | v0.6.0 |  https://github.com/tobiasanker/libKitsuneCommon.git
+libKitsunemimiCommon | v0.7.0 |  https://github.com/tobiasanker/libKitsunemimiCommon.git
 
 
 ### build library
@@ -78,7 +78,7 @@ Before running the build-script:
 
 ```bash
 .
-└── libKitsuneIni
+└── libKitsunemimiIni
     ├── build.sh
     └── ...
 ```
@@ -88,31 +88,31 @@ After running the build-script:
 ```bash
 .
 ├── build
-│   ├── libKitsuneCommon
+│   ├── libKitsunemimiCommon
 │   │   └── ...
-│   └── libKitsuneIni
+│   └── libKitsunemimiIni
 │       └── ...
 │
-├── libKitsuneCommon
+├── libKitsunemimiCommon
 │   └── ...
-├── libKitsuneIni
+├── libKitsunemimiIni
 │   ├── build.sh
 │   └── ...
 │
 └── result
     ├── include
-    │   ├── libKitsuneCommon
+    │   ├── libKitsunemimiCommon
     │   │   └── ...
-    │   └── libKitsuneIni
+    │   └── libKitsunemimiIni
     │       └── ...
     │
-    ├── libKitsuneCommon.so.0 -> libKitsuneCommon.so.0.6.0
-    ├── libKitsuneCommon.so.0.6 -> libKitsuneCommon.so.0.6.0
-    ├── libKitsuneCommon.so.0.6.0
+    ├── libKitsunemimiCommon.so.0 -> libKitsunemimiCommon.so.0.7.0
+    ├── libKitsunemimiCommon.so.0.7 -> libKitsunemimiCommon.so.0.7.0
+    ├── libKitsunemimiCommon.so.0.7.0
     │
-    ├── libKitsuneIni.so.0 -> libKitsuneIni.so.0.2.1
-    ├── libKitsuneIni.so.0.2 -> libKitsuneIni.so.0.2.1
-    └── libKitsuneIni.so.0.2.1
+    ├── libKitsunemimiIni.so.0 -> libKitsunemimiIni.so.0.3.0
+    ├── libKitsunemimiIni.so.0.3 -> libKitsunemimiIni.so.0.3.0
+    └── libKitsunemimiIni.so.0.3.0
 ```
 
 It create automatic a `build` and `result` directory in the directory, where you have cloned the project. At first it build all into the `build`-directory and after all build-steps are finished, it copy the include directory from the cloned repository and the build library into the `result`-directory. So you have all in one single place.
@@ -122,12 +122,12 @@ Tested on Debian and Ubuntu. If you use Centos, Arch, etc and the build-script f
 
 ## Usage
 
-**Header-file:** `libKitsuneIni/ini_item.h`
+**Header-file:** `libKitsunemimiIni/ini_item.h`
 
 The `IniItem`-class is the handler for the ini-file-content. The functions in the header should be really self-explaned, if something is unclear, see the following example or the comments in the cpp-file.
 
 ```cpp
-#include <libKitsuneIni/ini_item.h>
+#include <libKitsunemimiIni/ini_item.h>
 
 // short test-string for demonstration. 
 const std::string testString(
@@ -148,7 +148,7 @@ std::pair<bool, std::string> result = object.parse(testString);
 
 DataItem* value = object.get("DEFAULT", "x")
 // if value is a nullptr, then the group and/or item doesn't exist
-// the DataItem-class comes from my library libKitsuneCommon
+// the DataItem-class comes from my library libKitsunemimiCommon
 
 
 // get an item of the ini-file-content
