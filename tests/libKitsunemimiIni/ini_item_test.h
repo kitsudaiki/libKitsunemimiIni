@@ -10,14 +10,14 @@
 #define PARSERTEST_H
 
 #include <algorithm>
-#include <libKitsuneCommon/unit_test.h>
+#include <libKitsunemimiCommon/test.h>
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
 class IniItem_Test
-        : public Kitsune::Common::UnitTest
+        : public Kitsunemimi::Common::Test
 {
 public:
     IniItem_Test();
@@ -34,6 +34,6 @@ private:
 };
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
 
 #endif // PARSERTEST_H

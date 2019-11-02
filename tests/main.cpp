@@ -6,10 +6,10 @@
  *  @copyright MIT License
  */
 
-#include <libKitsuneIni/ini_item_test.h>
+#include <libKitsunemimiIni/ini_item_test.h>
 
 int main()
 {
-    Kitsune::Ini::IniItem_Test iniItem_test;
+    Kitsunemimi::Ini::IniItem_Test iniItem_test;
     return 0;
 }

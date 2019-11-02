@@ -6,17 +6,17 @@
  *  @copyright MIT License
  */
 
-#include <libKitsuneIni/ini_item.h>
+#include <libKitsunemimiIni/ini_item.h>
 
-#include <libKitsuneCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/common_items/data_items.h>
 #include <ini_parsing/ini_parser_interface.h>
 
-using Kitsune::Common::DataItem;
-using Kitsune::Common::DataArray;
-using Kitsune::Common::DataValue;
-using Kitsune::Common::DataMap;
+using Kitsunemimi::Common::DataItem;
+using Kitsunemimi::Common::DataArray;
+using Kitsunemimi::Common::DataValue;
+using Kitsunemimi::Common::DataMap;
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
@@ -314,4 +314,4 @@ std::string IniItem::toString()
 }
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi

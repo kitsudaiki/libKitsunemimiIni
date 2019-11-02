@@ -5,19 +5,19 @@ QT -= qt core gui
 CONFIG   -= app_bundle
 CONFIG += c++14 console
 
-LIBS += -L../../libKitsuneCommon/src -lKitsuneCommon
-LIBS += -L../../libKitsuneCommon/src/debug -lKitsuneCommon
-LIBS += -L../../libKitsuneCommon/src/release -lKitsuneCommon
-INCLUDEPATH += ../../libKitsuneCommon/include
+LIBS += -L../../libKitsunemimiCommon/src -lKitsunemimiCommon
+LIBS += -L../../libKitsunemimiCommon/src/debug -lKitsunemimiCommon
+LIBS += -L../../libKitsunemimiCommon/src/release -lKitsunemimiCommon
+INCLUDEPATH += ../../libKitsunemimiCommon/include
 
 INCLUDEPATH += $$PWD
 
-LIBS += -L../src -lKitsuneIni
+LIBS += -L../src -lKitsunemimiIni
 
 SOURCES += \
         main.cpp \
-    libKitsuneIni/ini_item_test.cpp
+    libKitsunemimiIni/ini_item_test.cpp
 
 HEADERS += \
-    libKitsuneIni/ini_item_test.h
+    libKitsunemimiIni/ini_item_test.h
 

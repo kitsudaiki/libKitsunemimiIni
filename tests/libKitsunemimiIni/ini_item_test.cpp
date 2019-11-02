@@ -7,16 +7,16 @@
  */
 
 #include "ini_item_test.h"
-#include <libKitsuneIni/ini_item.h>
-#include <libKitsuneCommon/common_items/data_items.h>
+#include <libKitsunemimiIni/ini_item.h>
+#include <libKitsunemimiCommon/common_items/data_items.h>
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
 
 IniItem_Test::IniItem_Test()
-    : Kitsune::Common::UnitTest("IniItem_Test")
+    : Kitsunemimi::Common::Test("IniItem_Test")
 {
     parse_test();
     get_test();
@@ -35,7 +35,7 @@ IniItem_Test::parse_test()
     IniItem object;
     std::pair<bool, std::string> result = object.parse(getTestString());
 
-    UNITTEST(result.first, true);
+    TEST_EQUAL(result.first, true);
     if(result.first == false) {
         std::cout<<"result.second: "<<result.second<<std::endl;
     }
@@ -51,10 +51,10 @@ IniItem_Test::get_test()
     std::pair<bool, std::string> result = object.parse(getTestString());
 
     std::string get1 = object.get("DEFAULT", "x")->toValue()->toString();
-    UNITTEST(get1, "2");
+    TEST_EQUAL(get1, "2");
 
     std::string get2= object.get("hmmm", "poi_poi")->toValue()->toString();
-    UNITTEST(get2, "1.300000");
+    TEST_EQUAL(get2, "1.300000");
 }
 
 /**
@@ -66,13 +66,13 @@ IniItem_Test::set_test()
     IniItem object;
     std::pair<bool, std::string> result = object.parse(getTestString());
 
-    UNITTEST(object.set("hmmm2", "poi", "asdf"), true);
-    UNITTEST(object.set("hmmm2", "poi", "asdf"), false);
+    TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), true);
+    TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), false);
 
-    UNITTEST(object.set("hmmm", "poi_poi", "asdf", true), true);
+    TEST_EQUAL(object.set("hmmm", "poi_poi", "asdf", true), true);
 
     std::string get2= object.get("hmmm", "poi_poi")->toValue()->getString();
-    UNITTEST(get2, "asdf");
+    TEST_EQUAL(get2, "asdf");
 }
 
 /**
@@ -84,8 +84,8 @@ IniItem_Test::removeGroup_test()
     IniItem object;
     std::pair<bool, std::string> result = object.parse(getTestString());
 
-    UNITTEST(object.removeGroup("hmmm"), true);
-    UNITTEST(object.removeGroup("hmmm"), false);
+    TEST_EQUAL(object.removeGroup("hmmm"), true);
+    TEST_EQUAL(object.removeGroup("hmmm"), false);
 
     const std::string compare(
                 "[DEFAULT]\n"
@@ -94,7 +94,7 @@ IniItem_Test::removeGroup_test()
                 "x = 2\n"
                 "\n");
 
-    UNITTEST(object.toString(), compare);
+    TEST_EQUAL(object.toString(), compare);
 }
 
 /**
@@ -106,9 +106,9 @@ IniItem_Test::removeEntry_test()
     IniItem object;
     std::pair<bool, std::string> result = object.parse(getTestString());
 
-    UNITTEST(object.removeEntry("DEFAULT", "x"), true);
-    UNITTEST(object.removeEntry("DEFAULT", "x"), false);
-    UNITTEST(object.removeEntry("fail", "x"), false);
+    TEST_EQUAL(object.removeEntry("DEFAULT", "x"), true);
+    TEST_EQUAL(object.removeEntry("DEFAULT", "x"), false);
+    TEST_EQUAL(object.removeEntry("fail", "x"), false);
 
     const std::string compare(
                 "[DEFAULT]\n"
@@ -119,7 +119,7 @@ IniItem_Test::removeEntry_test()
                 "poi_poi = 1.300000\n"
                 "\n");
 
-    UNITTEST(object.toString(), compare);
+    TEST_EQUAL(object.toString(), compare);
 }
 
 /**
@@ -155,7 +155,7 @@ IniItem_Test::print_test()
                 "[hmmm]\n"
                 "poi_poi = 1.300000\n"
                 "\n");
-    UNITTEST(outputStringObjects, compare);
+    TEST_EQUAL(outputStringObjects, compare);
 
 
     // negative test
@@ -169,14 +169,14 @@ IniItem_Test::print_test()
                 "poi.poi = 1.300000\n"
                 "\n");
     result = object.parse(badString);
-    UNITTEST(result.first, false);
+    TEST_EQUAL(result.first, false);
 
     const std::string compareError("ERROR while parsing ini-formated string \n"
                                    "parser-message: syntax error \n"
                                    "line-number: 7 \n"
                                    "position in line: 1 \n"
                                    "broken part in string: \"poi.poi\" \n");
-    UNITTEST(result.second, compareError);
+    TEST_EQUAL(result.second, compareError);
 }
 
 /**
@@ -200,5 +200,5 @@ IniItem_Test::getTestString()
 }
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
 

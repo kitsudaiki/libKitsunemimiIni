@@ -1,14 +1,14 @@
 QT -= qt core gui
 
-TARGET = KitsuneIni
+TARGET = KitsunemimiIni
 CONFIG += c++14
 TEMPLATE = lib
 VERSION = 0.2.2
 
-LIBS += -L../../libKitsuneCommon/src -lKitsuneCommon
-LIBS += -L../../libKitsuneCommon/src/debug -lKitsuneCommon
-LIBS += -L../../libKitsuneCommon/src/release -lKitsuneCommon
-INCLUDEPATH += ../../libKitsuneCommon/include
+LIBS += -L../../libKitsunemimiCommon/src -lKitsunemimiCommon
+LIBS += -L../../libKitsunemimiCommon/src/debug -lKitsunemimiCommon
+LIBS += -L../../libKitsunemimiCommon/src/release -lKitsunemimiCommon
+INCLUDEPATH += ../../libKitsunemimiCommon/include
 
 INCLUDEPATH += $$PWD \
                $$PWD/../include
@@ -19,7 +19,7 @@ SOURCES += \
 
 HEADERS += \
     ini_parsing/ini_parser_interface.h \
-    ../include/libKitsuneIni/ini_item.h
+    ../include/libKitsunemimiIni/ini_item.h
 
 FLEXSOURCES = grammar/ini_lexer.l
 BISONSOURCES = grammar/ini_parser.y

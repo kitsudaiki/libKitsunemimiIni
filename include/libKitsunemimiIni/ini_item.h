@@ -14,7 +14,7 @@
 #include <vector>
 #include <map>
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Common {
 class DataItem;
@@ -73,6 +73,6 @@ private:
 };
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
 
 #endif // INIITEM_H

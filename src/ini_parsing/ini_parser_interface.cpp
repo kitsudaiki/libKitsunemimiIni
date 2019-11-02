@@ -8,14 +8,14 @@
 
 #include <ini_parsing/ini_parser_interface.h>
 #include <ini_parser.h>
-#include <libKitsuneCommon/common_methods/string_methods.h>
+#include <libKitsunemimiCommon/common_methods/string_methods.h>
 
 # define YY_DECL \
-    Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
+    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
 YY_DECL;
 
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
@@ -51,7 +51,7 @@ IniParserInterface::parse(const std::string &inputString)
 
     // run parser-code
     this->scan_begin(inputString);
-    Kitsune::Ini::IniParser parser(*this);
+    Kitsunemimi::Ini::IniParser parser(*this);
     int res = parser.parse();
     this->scan_end();
 
@@ -116,7 +116,7 @@ IniParserInterface::getOutput() const
  * @param message error-specific message from the parser
  */
 void
-IniParserInterface::error(const Kitsune::Ini::location& location,
+IniParserInterface::error(const Kitsunemimi::Ini::location& location,
                           const std::string& message)
 {
     // get the broken part of the parsed string
@@ -150,4 +150,4 @@ IniParserInterface::getErrorMessage() const
 }
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
