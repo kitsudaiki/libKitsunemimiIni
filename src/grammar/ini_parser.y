@@ -15,7 +15,7 @@
 %define parser_class_name {IniParser}
 
 %define api.prefix {ini}
-%define api.namespace {Kitsune::Ini}
+%define api.namespace {Kitsunemimi::Ini}
 %define api.token.constructor
 %define api.value.type variant
 %define parse.assert
@@ -27,24 +27,24 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <libKitsuneCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/common_items/data_items.h>
 
-using Kitsune::Common::DataItem;
-using Kitsune::Common::DataArray;
-using Kitsune::Common::DataValue;
-using Kitsune::Common::DataMap;
+using Kitsunemimi::Common::DataItem;
+using Kitsunemimi::Common::DataArray;
+using Kitsunemimi::Common::DataValue;
+using Kitsunemimi::Common::DataMap;
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
 class IniParserInterface;
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
 }
 
 // The parsing context.
-%param { Kitsune::Ini::IniParserInterface& driver }
+%param { Kitsunemimi::Ini::IniParserInterface& driver }
 
 %locations
 
@@ -53,7 +53,7 @@ class IniParserInterface;
 #include <ini_parsing/ini_parser_interface.h>
 # undef YY_DECL
 # define YY_DECL \
-    Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
+    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
 YY_DECL;
 }
 
@@ -217,7 +217,7 @@ defaultroute:
 
 %%
 
-void Kitsune::Ini::IniParser::error(const Kitsune::Ini::location& location,
+void Kitsunemimi::Ini::IniParser::error(const Kitsunemimi::Ini::location& location,
                                     const std::string& message)
 {
     driver.error(location, message);

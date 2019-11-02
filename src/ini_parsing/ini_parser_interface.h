@@ -13,16 +13,16 @@
 #include <string>
 #include <string>
 #include <map>
-#include <libKitsuneCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/common_items/data_items.h>
 
 #include <iostream>
 
-using Kitsune::Common::DataItem;
+using Kitsunemimi::Common::DataItem;
 using std::string;
 using std::map;
 using std::pair;
 
-namespace Kitsune
+namespace Kitsunemimi
 {
 namespace Ini
 {
@@ -45,7 +45,7 @@ public:
     DataItem* getOutput() const;
 
     // Error handling.
-    void error(const Kitsune::Ini::location &location,
+    void error(const Kitsunemimi::Ini::location &location,
                const std::string& message);
     std::string getErrorMessage() const;
 
@@ -61,6 +61,6 @@ private:
 };
 
 }  // namespace Ini
-}  // namespace Kitsune
+}  // namespace Kitsunemimi
 
 #endif // INIPARSERINTERFACE_H

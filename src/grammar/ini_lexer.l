@@ -22,10 +22,10 @@
 # undef YY_DECL
 # endif
 # define YY_DECL \
-    Kitsune::Ini::IniParser::symbol_type inilex (Kitsune::Ini::IniParserInterface& driver)
+    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
 YY_DECL;
 
-Kitsune::Ini::location iniloc;
+Kitsunemimi::Ini::location iniloc;
 %}
 
 
@@ -46,15 +46,15 @@ blank [ \t]
 %}
 
 
-{blank}+    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { iniloc.step();  } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-[\n]        {iniloc.lines(1); return Kitsune::Ini::IniParser::make_LINEBREAK (iniloc); }
-"="         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_EQUAL (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"["         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_BRACKOPEN (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"]"         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_BRACKCLOSE (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-","         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_COMMA (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"#"         if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_COMMENT (iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+{blank}+    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { iniloc.step();  } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+[\n]        {iniloc.lines(1); return Kitsunemimi::Ini::IniParser::make_LINEBREAK (iniloc); }
+"="         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_EQUAL (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"["         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BRACKOPEN (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"]"         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BRACKCLOSE (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+","         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_COMMA (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"#"         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_COMMENT (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 \"(\\.|[^"\\])*\" {
-            if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_STRING(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+            if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_STRING(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
 
@@ -67,36 +67,36 @@ blank [ \t]
     {
         driver.error(iniloc, "integer is out of range");
     }
-    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
 {int}+"."{int}*	{
     float value = atof( yytext );
-    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-{id} if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_IDENTIFIER(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+{id} if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_IDENTIFIER(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 
 
 [a-zA-Z_0-9|\-|.]* {
-    if(Kitsune::Ini::IniParserInterface::m_outsideComment) { return Kitsune::Ini::IniParser::make_STRING_PLN(yytext, iniloc); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_STRING_PLN(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-.          if(Kitsune::Ini::IniParserInterface::m_outsideComment) { driver.error(iniloc, "invalid character"); } else { return Kitsune::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-<<EOF>>    return Kitsune::Ini::IniParser::make_END(iniloc);
+.          if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { driver.error(iniloc, "invalid character"); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+<<EOF>>    return Kitsunemimi::Ini::IniParser::make_END(iniloc);
 
 %%
 
 
-void Kitsune::Ini::IniParserInterface::scan_begin(const std::string &inputString)
+void Kitsunemimi::Ini::IniParserInterface::scan_begin(const std::string &inputString)
 {
-    Kitsune::Ini::location newLoc;
+    Kitsunemimi::Ini::location newLoc;
     iniloc = newLoc;
     yy_flex_debug = m_traceParsing;
     yy_scan_string(inputString.c_str());
 }
 
-void Kitsune::Ini::IniParserInterface::scan_end()
+void Kitsunemimi::Ini::IniParserInterface::scan_end()
 {
     yy_delete_buffer(YY_CURRENT_BUFFER);
 }
