@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.1] - 2019-11-22
+
+### Changed
+- update values-ranges to use long and double
+
 
 ## [0.3.0] - 2019-11-02
 
