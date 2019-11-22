@@ -73,8 +73,8 @@ YY_DECL;
 %token <std::string> IDENTIFIER "identifier"
 %token <std::string> STRING "string"
 %token <std::string> STRING_PLN "string_pln"
-%token <int> NUMBER "number"
-%token <float> FLOAT "float"
+%token <long> NUMBER "number"
+%token <double> FLOAT "float"
 
 %type <DataMap*> grouplist
 %type <std::string> groupheader

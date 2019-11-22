@@ -32,7 +32,7 @@ Kitsunemimi::Ini::location iniloc;
 %option noyywrap nounput batch debug yylineno prefix="ini"
 
 id    [a-zA-Z_0-9]*
-int   -?([0-9]+)
+long   -?([0-9]+)
 blank [ \t]
 
 %{
@@ -58,11 +58,11 @@ blank [ \t]
 }
 
 
-{int}      {
+{long}      {
     errno = 0;
     long length = strtol(yytext, NULL, 10);
-    if (!(INT_MIN <= length
-        && length <= INT_MAX
+    if (!(LONG_MIN <= length
+        && length <= LONG_MAX
         && errno != ERANGE))
     {
         driver.error(iniloc, "integer is out of range");
@@ -70,8 +70,8 @@ blank [ \t]
     if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-{int}+"."{int}*	{
-    float value = atof( yytext );
+{long}+"."{long}*	{
+    double value = strtod( yytext , NULL );
     if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
