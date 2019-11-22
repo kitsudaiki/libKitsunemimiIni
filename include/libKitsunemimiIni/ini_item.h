@@ -44,11 +44,11 @@ public:
              const bool force=false);
     bool set(const std::string& group,
              const std::string& item,
-             const int value,
+             const long value,
              const bool force=false);
     bool set(const std::string& group,
              const std::string& item,
-             const float value,
+             const double value,
              const bool force=false);
     bool set(const std::string& group,
              const std::string& item,

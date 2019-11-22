@@ -118,7 +118,7 @@ IniItem::set(const std::string &group,
  *
  * @param group group-name
  * @param item item-key-name
- * @param value integer as new Value
+ * @param value long as new Value
  * @param force overwrite, if already exist
  *
  * @return false, if item already exist with value and force is false, else it returns true
@@ -126,7 +126,7 @@ IniItem::set(const std::string &group,
 bool
 IniItem::set(const std::string &group,
              const std::string &item,
-             const int value,
+             const long value,
              const bool force)
 {
     return set(group, item, new DataValue(value), force);
@@ -137,7 +137,7 @@ IniItem::set(const std::string &group,
  *
  * @param group group-name
  * @param item item-key-name
- * @param value float new Value
+ * @param value double new Value
  * @param force overwrite, if already exist
  *
  * @return false, if item already exist with value and force is false, else it returns true
@@ -145,7 +145,7 @@ IniItem::set(const std::string &group,
 bool
 IniItem::set(const std::string &group,
              const std::string &item,
-             const float value,
+             const double value,
              const bool force)
 {
     return set(group, item, new DataValue(value), force);
