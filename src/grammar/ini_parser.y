@@ -85,7 +85,6 @@ YY_DECL;
 %%
 %start startpoint;
 
-
 startpoint:
     grouplist
     {
@@ -99,10 +98,23 @@ grouplist:
         $$ = $1;
     }
 |
+    grouplist groupheader linebreaks
+    {
+        $1->insert($2, new DataMap());
+        $$ = $1;
+    }
+|
     groupheader linebreaks itemlist
     {
         DataMap* newMap = new DataMap();
         newMap->insert($1, $3);
+        $$ = newMap;
+    }
+|
+    groupheader linebreaks
+    {
+        DataMap* newMap = new DataMap();
+        newMap->insert($1, new DataMap());
         $$ = newMap;
     }
 
@@ -127,6 +139,20 @@ itemlist:
     }
 
 itemValue:
+    itemValue "identifier"
+    {
+        std::string temp = $1->toString();
+        delete $1;
+        temp += " " + $2;
+        $$ = new DataValue(temp);
+    }
+|
+    "identifier" "=" "identifier"
+    {
+        std::string temp = $1 + "=" + $3;
+        $$ = new DataValue(temp);
+    }
+|
     "identifier"
     {
         $$ = new DataValue($1);
@@ -157,7 +183,6 @@ itemValue:
         $$ = new DataValue($1);
     }
 
-
 identifierlist:
     identifierlist "," "string"
     {
@@ -167,6 +192,13 @@ identifierlist:
     }
 |
     identifierlist "," "string_pln"
+    {
+        DataArray* array = dynamic_cast<DataArray*>($1);
+        array->append(new DataValue($3));
+        $$ = $1;
+    }
+|
+    identifierlist "," "identifier"
     {
         DataArray* array = dynamic_cast<DataArray*>($1);
         array->append(new DataValue($3));
@@ -186,6 +218,15 @@ identifierlist:
         tempItem->append(new DataValue($1));
         $$ = tempItem;
     }
+|
+    "identifier" "," "identifier"
+    {
+        DataArray* tempItem = new DataArray();
+        tempItem->append(new DataValue($1));
+        tempItem->append(new DataValue($3));
+        $$ = tempItem;
+    }
+
 
 commentline:
    comment  defaultroute  "lbreak"

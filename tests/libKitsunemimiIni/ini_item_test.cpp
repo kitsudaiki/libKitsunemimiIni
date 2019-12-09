@@ -165,17 +165,17 @@ IniItem_Test::print_test()
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
                 "\n"
-                "[hmmm]\n"
-                "poi.poi = 1.300000\n"
+                "(hmmm]\n"
+                "poi_poi = 1.300000\n"
                 "\n");
     result = object.parse(badString);
     TEST_EQUAL(result.first, false);
 
     const std::string compareError("ERROR while parsing ini-formated string \n"
                                    "parser-message: syntax error \n"
-                                   "line-number: 7 \n"
-                                   "position in line: 1 \n"
-                                   "broken part in string: \"poi.poi\" \n");
+                                   "line-number: 6 \n"
+                                   "position in line: 6 \n"
+                                   "broken part in string: \"]\" \n");
     TEST_EQUAL(result.second, compareError);
 }
 

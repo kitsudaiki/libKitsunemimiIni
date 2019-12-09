@@ -30,8 +30,7 @@ Kitsunemimi::Ini::location iniloc;
 
 
 %option noyywrap nounput batch debug yylineno prefix="ini"
-
-id    [a-zA-Z_0-9]*
+id    [%\-+\/@.:a-zA-Z_0-9]*
 long   -?([0-9]+)
 blank [ \t]
 
@@ -70,7 +69,7 @@ blank [ \t]
     if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
 
-{long}+"."{long}*	{
+{long}+"."{long}*       {
     double value = strtod( yytext , NULL );
     if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
 }
@@ -100,5 +99,3 @@ void Kitsunemimi::Ini::IniParserInterface::scan_end()
 {
     yy_delete_buffer(YY_CURRENT_BUFFER);
 }
-
-
