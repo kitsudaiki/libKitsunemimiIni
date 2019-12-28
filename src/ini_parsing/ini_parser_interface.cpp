@@ -124,7 +124,8 @@ IniParserInterface::error(const Kitsunemimi::Ini::location& location,
     const uint32_t errorLength = location.end.column - location.begin.column;
     const uint32_t linenumber = location.begin.line;
 
-    const std::vector<std::string> splittedContent = splitStringByDelimiter(m_inputString, '\n');
+    std::vector<std::string> splittedContent;
+    splitStringByDelimiter(splittedContent, m_inputString, '\n');
 
     // -1 because the number starts for user-readability at 1 instead of 0
     const std::string errorStringPart = splittedContent[linenumber - 1].substr(errorStart - 1,
