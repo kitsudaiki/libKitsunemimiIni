@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.2] - 2019-12-30
+
+### Fixed
+- fixed parser to handle more complex ini-files
+
+
 ## [0.3.1] - 2019-11-22
 
 ### Changed
