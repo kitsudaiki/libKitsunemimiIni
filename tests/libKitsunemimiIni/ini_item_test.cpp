@@ -33,11 +33,13 @@ void
 IniItem_Test::parse_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
 
-    TEST_EQUAL(result.first, true);
-    if(result.first == false) {
-        std::cout<<"result.second: "<<result.second<<std::endl;
+    bool result = object.parse(getTestString(), errorMessage);
+
+    TEST_EQUAL(result, true);
+    if(result == false) {
+        std::cout<<"errorMessage: "<<errorMessage<<std::endl;
     }
 }
 
@@ -48,12 +50,14 @@ void
 IniItem_Test::get_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
+
+    object.parse(getTestString(), errorMessage);
 
     std::string get1 = object.get("DEFAULT", "x")->toValue()->toString();
     TEST_EQUAL(get1, "2");
 
-    std::string get2= object.get("hmmm", "poi_poi")->toValue()->toString();
+    std::string get2 = object.get("hmmm", "poi_poi")->toValue()->toString();
     TEST_EQUAL(get2, "1.300000");
 }
 
@@ -64,7 +68,9 @@ void
 IniItem_Test::set_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
+
+    object.parse(getTestString(), errorMessage);
 
     TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), true);
     TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), false);
@@ -82,7 +88,9 @@ void
 IniItem_Test::removeGroup_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
+
+    object.parse(getTestString(), errorMessage);
 
     TEST_EQUAL(object.removeGroup("hmmm"), true);
     TEST_EQUAL(object.removeGroup("hmmm"), false);
@@ -104,7 +112,9 @@ void
 IniItem_Test::removeEntry_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
+
+    object.parse(getTestString(), errorMessage);
 
     TEST_EQUAL(object.removeEntry("DEFAULT", "x"), true);
     TEST_EQUAL(object.removeEntry("DEFAULT", "x"), false);
@@ -142,7 +152,9 @@ void
 IniItem_Test::print_test()
 {
     IniItem object;
-    std::pair<bool, std::string> result = object.parse(getTestString());
+    std::string errorMessage = "";
+
+    object.parse(getTestString(), errorMessage);
 
     const std::string outputStringObjects = object.toString();
 
@@ -168,15 +180,15 @@ IniItem_Test::print_test()
                 "(hmmm]\n"
                 "poi_poi = 1.300000\n"
                 "\n");
-    result = object.parse(badString);
-    TEST_EQUAL(result.first, false);
+    bool result = object.parse(badString, errorMessage);
+    TEST_EQUAL(result, false);
 
     const std::string compareError("ERROR while parsing ini-formated string \n"
                                    "parser-message: syntax error \n"
                                    "line-number: 6 \n"
                                    "position in line: 6 \n"
                                    "broken part in string: \"]\" \n");
-    TEST_EQUAL(result.second, compareError);
+    TEST_EQUAL(errorMessage, compareError);
 }
 
 /**

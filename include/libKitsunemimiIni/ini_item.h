@@ -28,28 +28,29 @@ public:
     IniItem();
     ~IniItem();
 
-    std::pair<bool, std::string> parse(const std::string &content,
-                                       const bool traceParsing = false);
+    bool parse(const std::string &content,
+               std::string &errorMessage,
+               const bool traceParsing = false);
 
     // get
-    DataItem* get(const std::string& group,
-                  const std::string& item);
+    DataItem* get(const std::string &group,
+                  const std::string &item);
 
     // set
-    bool set(const std::string& group,
-             const std::string& item,
+    bool set(const std::string &group,
+             const std::string &item,
              const std::string value,
              const bool force=false);
-    bool set(const std::string& group,
-             const std::string& item,
+    bool set(const std::string &group,
+             const std::string &item,
              const long value,
              const bool force=false);
-    bool set(const std::string& group,
-             const std::string& item,
+    bool set(const std::string &group,
+             const std::string &item,
              const double value,
              const bool force=false);
-    bool set(const std::string& group,
-             const std::string& item,
+    bool set(const std::string &group,
+             const std::string &item,
              const std::vector<std::string> value,
              const bool force=false);
 

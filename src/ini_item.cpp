@@ -43,26 +43,25 @@ IniItem::~IniItem()
  * @brief parse the content of an ini-file
  *
  * @param content content of an ini-file as string
- * @param traceParsing trace parser-actions for debugging only (defualt: false)
+ * @param errorMessage reference for error-message output
+ * @param traceParsing trace parser-actions for debugging only (Default: false)
  *
- * @return pair of bool and string
- *         success: first is true, second is empty-string
- *         fail: first is false, second is error-message
+ * @return true, if successful, else false
  */
-std::pair<bool, std::string>
+bool
 IniItem::parse(const std::string &content,
+               std::string &errorMessage,
                const bool traceParsing)
 {
-    std::pair<bool, std::string> result;
     IniParserInterface parser(traceParsing);
 
     // parse ini-template into a data-tree
-    result.first = parser.parse(content);
+    bool result = parser.parse(content);
 
     // process a failure
-    if(result.first == false)
+    if(result == false)
     {
-        result.second = parser.getErrorMessage();
+        errorMessage = parser.getErrorMessage();
         return result;
     }
 
@@ -81,7 +80,7 @@ IniItem::parse(const std::string &content,
  * @param group group-name
  * @param item item-key-name
  *
- * @return requested value as data-item
+ * @return requested value as data-item, if found, else nullptr
  */
 DataItem*
 IniItem::get(const std::string &group,
@@ -264,8 +263,8 @@ std::string IniItem::toString()
     std::string output = "";
 
     // iterate over all groups
-    std::map<std::string, DataItem*> completeContent = m_content->toMap()->m_map;
-    std::map<std::string, DataItem*>::iterator itGroup;
+    const std::map<std::string, DataItem*> completeContent = m_content->toMap()->m_map;
+    std::map<std::string, DataItem*>::const_iterator itGroup;
     for(itGroup = completeContent.begin();
         itGroup != completeContent.end();
         itGroup++)
@@ -276,8 +275,8 @@ std::string IniItem::toString()
         output.append("]\n");
 
         // iterate over group-content
-        std::map<std::string, DataItem*> groupContent = itGroup->second->toMap()->m_map;
-        map<string, DataItem*>::iterator itItem;
+        const std::map<std::string, DataItem*> groupContent = itGroup->second->toMap()->m_map;
+        map<string, DataItem*>::const_iterator itItem;
         for(itItem = groupContent.begin();
             itItem != groupContent.end();
             itItem++)
@@ -289,7 +288,7 @@ std::string IniItem::toString()
             if(itItem->second->getType() == DataItem::ARRAY_TYPE)
             {
                 // print arrays
-                std::vector<DataItem*> array = itItem->second->toArray()->m_array;
+                const std::vector<DataItem*> array = itItem->second->toArray()->m_array;
                 for(uint64_t i = 0; i < array.size(); i++)
                 {
                     if(i != 0) {
