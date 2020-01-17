@@ -17,7 +17,7 @@ namespace Kitsunemimi
 namespace Ini
 {
 class IniItem_Test
-        : public Kitsunemimi::Common::Test
+        : public Kitsunemimi::Test
 {
 public:
     IniItem_Test();

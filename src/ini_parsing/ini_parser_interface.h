@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-using Kitsunemimi::Common::DataItem;
+using Kitsunemimi::DataItem;
 using std::string;
 using std::map;
 using std::pair;
