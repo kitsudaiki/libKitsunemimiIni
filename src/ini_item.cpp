@@ -11,10 +11,10 @@
 #include <libKitsunemimiCommon/common_items/data_items.h>
 #include <ini_parsing/ini_parser_interface.h>
 
-using Kitsunemimi::Common::DataItem;
-using Kitsunemimi::Common::DataArray;
-using Kitsunemimi::Common::DataValue;
-using Kitsunemimi::Common::DataMap;
+using Kitsunemimi::DataItem;
+using Kitsunemimi::DataArray;
+using Kitsunemimi::DataValue;
+using Kitsunemimi::DataMap;
 
 namespace Kitsunemimi
 {
@@ -83,7 +83,7 @@ IniItem::parse(const std::string &content,
  *
  * @return requested value as data-item
  */
-Common::DataItem*
+DataItem*
 IniItem::get(const std::string &group,
              const std::string &item)
 {

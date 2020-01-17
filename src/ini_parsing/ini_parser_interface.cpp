@@ -19,7 +19,7 @@ namespace Kitsunemimi
 {
 namespace Ini
 {
-using Common::splitStringByDelimiter;
+using Kitsunemimi::splitStringByDelimiter;
 
 bool IniParserInterface::m_outsideComment = true;
 
@@ -88,7 +88,7 @@ IniParserInterface::removeQuotes(std::string input)
 /**
  * Is called for the parser after successfully parsing the input-string
  *
- * @param output parser-output as Common::DataArray
+ * @param output parser-output as DataArray
  */
 void
 IniParserInterface::setOutput(DataItem *output)
@@ -99,7 +99,7 @@ IniParserInterface::setOutput(DataItem *output)
 /**
  * getter for the data-output of the parser
  *
- * @return parser-output as Common::DataArray
+ * @return parser-output as DataArray
  */
 DataItem*
 IniParserInterface::getOutput() const

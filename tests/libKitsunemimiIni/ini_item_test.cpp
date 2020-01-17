@@ -16,7 +16,7 @@ namespace Ini
 {
 
 IniItem_Test::IniItem_Test()
-    : Kitsunemimi::Common::Test("IniItem_Test")
+    : Kitsunemimi::Test("IniItem_Test")
 {
     parse_test();
     get_test();

@@ -16,9 +16,7 @@
 
 namespace Kitsunemimi
 {
-namespace Common {
 class DataItem;
-}
 namespace Ini
 {
 class IniParserInterface;
@@ -34,8 +32,8 @@ public:
                                        const bool traceParsing = false);
 
     // get
-    Common::DataItem* get(const std::string& group,
-                          const std::string& item);
+    DataItem* get(const std::string& group,
+                  const std::string& item);
 
     // set
     bool set(const std::string& group,
@@ -63,12 +61,12 @@ public:
     // output
     std::string toString();
 
-    Common::DataItem* m_content = nullptr;
+    DataItem* m_content = nullptr;
 
 private:
     bool set(const std::string& group,
              const std::string& item,
-             Common::DataItem* value,
+             DataItem* value,
              bool force=false);
 };
 
