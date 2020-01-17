@@ -258,7 +258,8 @@ IniItem::set(const std::string &group,
  *
  * @return converted string
  */
-std::string IniItem::toString()
+const std::string
+IniItem::toString()
 {
     std::string output = "";
 

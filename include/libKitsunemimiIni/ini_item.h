@@ -60,7 +60,7 @@ public:
                      const std::string& item);
 
     // output
-    std::string toString();
+    const std::string toString();
 
     DataItem* m_content = nullptr;
 
