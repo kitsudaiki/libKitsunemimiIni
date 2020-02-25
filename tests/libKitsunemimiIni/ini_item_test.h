@@ -10,14 +10,14 @@
 #define PARSERTEST_H
 
 #include <algorithm>
-#include <libKitsunemimiCommon/test.h>
+#include <libKitsunemimiCommon/test_helper/compare_test_helper.h>
 
 namespace Kitsunemimi
 {
 namespace Ini
 {
 class IniItem_Test
-        : public Kitsunemimi::Test
+        : public Kitsunemimi::CompareTestHelper
 {
 public:
     IniItem_Test();
