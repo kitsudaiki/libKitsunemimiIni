@@ -98,6 +98,25 @@ IniItem::get(const std::string &group,
  *
  * @param group group-name
  * @param item item-key-name
+ * @param value char-pointer as new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
+ */
+bool
+IniItem::set(const std::string &group,
+             const std::string &item,
+             const char *value,
+             const bool force)
+{
+    return set(group, item, new DataValue(value), force);
+}
+
+/**
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
  * @param value string as new Value
  * @param force overwrite, if already exist
  *
@@ -145,6 +164,25 @@ bool
 IniItem::set(const std::string &group,
              const std::string &item,
              const double value,
+             const bool force)
+{
+    return set(group, item, new DataValue(value), force);
+}
+
+/**
+ * @brief set a value inside the ini-items
+ *
+ * @param group group-name
+ * @param item item-key-name
+ * @param value bool new Value
+ * @param force overwrite, if already exist
+ *
+ * @return false, if item already exist with value and force is false, else it returns true
+ */
+bool
+IniItem::set(const std::string &group,
+             const std::string &item,
+             const bool value,
              const bool force)
 {
     return set(group, item, new DataValue(value), force);

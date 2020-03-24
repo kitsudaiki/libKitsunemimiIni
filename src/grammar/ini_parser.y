@@ -62,6 +62,8 @@ YY_DECL;
 %token
     END  0  "end of file"
     LINEBREAK "lbreak"
+    BOOL_TRUE  "true"
+    BOOL_FALSE "false"
     EQUAL "="
     BRACKOPEN "["
     BRACKCLOSE "]"
@@ -181,6 +183,16 @@ itemValue:
     "float"
     {
         $$ = new DataValue($1);
+    }
+|
+    "true"
+    {
+        $$ = new DataValue(true);
+    }
+|
+    "false"
+    {
+        $$ = new DataValue(false);
     }
 
 identifierlist:

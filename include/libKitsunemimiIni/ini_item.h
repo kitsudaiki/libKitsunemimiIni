@@ -39,6 +39,10 @@ public:
     // set
     bool set(const std::string &group,
              const std::string &item,
+             const char* value,
+             const bool force=false);
+    bool set(const std::string &group,
+             const std::string &item,
              const std::string value,
              const bool force=false);
     bool set(const std::string &group,
@@ -48,6 +52,10 @@ public:
     bool set(const std::string &group,
              const std::string &item,
              const double value,
+             const bool force=false);
+    bool set(const std::string &group,
+             const std::string &item,
+             const bool value,
              const bool force=false);
     bool set(const std::string &group,
              const std::string &item,

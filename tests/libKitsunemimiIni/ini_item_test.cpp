@@ -59,6 +59,9 @@ IniItem_Test::get_test()
 
     std::string get2 = object.get("hmmm", "poi_poi")->toValue()->toString();
     TEST_EQUAL(get2, "1.300000");
+
+    bool getBool = object.get("hmmm", "bool_value")->toValue()->getBool();
+    TEST_EQUAL(getBool, true);
 }
 
 /**
@@ -77,7 +80,7 @@ IniItem_Test::set_test()
 
     TEST_EQUAL(object.set("hmmm", "poi_poi", "asdf", true), true);
 
-    std::string get2= object.get("hmmm", "poi_poi")->toValue()->getString();
+    std::string get2 = object.get("hmmm", "poi_poi")->toValue()->getString();
     TEST_EQUAL(get2, "asdf");
 }
 
@@ -126,6 +129,7 @@ IniItem_Test::removeEntry_test()
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "\n"
                 "[hmmm]\n"
+                "bool_value = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
 
@@ -165,6 +169,7 @@ IniItem_Test::print_test()
                 "x = 2\n"
                 "\n"
                 "[hmmm]\n"
+                "bool_value = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     TEST_EQUAL(outputStringObjects, compare);
@@ -178,6 +183,7 @@ IniItem_Test::print_test()
                 "x = 2\n"
                 "\n"
                 "(hmmm]\n"
+                "bool_value = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     bool result = object.parse(badString, errorMessage);
@@ -206,6 +212,7 @@ IniItem_Test::getTestString()
                 "\n\n"
                 "[hmmm]\n"
                 "# this is only a simple 0815 testcommit\n\n"
+                "bool_value = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     return testString;
