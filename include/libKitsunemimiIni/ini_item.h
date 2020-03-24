@@ -51,6 +51,10 @@ public:
              const bool force=false);
     bool set(const std::string &group,
              const std::string &item,
+             const bool value,
+             const bool force=false);
+    bool set(const std::string &group,
+             const std::string &item,
              const std::vector<std::string> value,
              const bool force=false);
 
