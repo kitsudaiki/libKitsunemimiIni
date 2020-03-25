@@ -40,27 +40,27 @@ public:
     bool set(const std::string &group,
              const std::string &item,
              const char* value,
-             const bool force=false);
+             const bool force = false);
     bool set(const std::string &group,
              const std::string &item,
              const std::string value,
-             const bool force=false);
+             const bool force = false);
     bool set(const std::string &group,
              const std::string &item,
              const long value,
-             const bool force=false);
+             const bool force = false);
     bool set(const std::string &group,
              const std::string &item,
              const double value,
-             const bool force=false);
+             const bool force = false);
     bool set(const std::string &group,
              const std::string &item,
              const bool value,
-             const bool force=false);
+             const bool force = false);
     bool set(const std::string &group,
              const std::string &item,
              const std::vector<std::string> value,
-             const bool force=false);
+             const bool force = false);
 
     // remove
     bool removeGroup(const std::string& group);
@@ -76,7 +76,7 @@ private:
     bool set(const std::string& group,
              const std::string& item,
              DataItem* value,
-             bool force=false);
+             bool force = false);
 };
 
 }  // namespace Ini
