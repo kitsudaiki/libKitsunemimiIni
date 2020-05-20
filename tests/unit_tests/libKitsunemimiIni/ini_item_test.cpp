@@ -103,6 +103,7 @@ IniItem_Test::removeGroup_test()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
+                "y = \n"
                 "\n");
 
     TEST_EQUAL(object.toString(), compare);
@@ -127,6 +128,7 @@ IniItem_Test::removeEntry_test()
                 "[DEFAULT]\n"
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
+                "y = \n"
                 "\n"
                 "[hmmm]\n"
                 "bool_value = true\n"
@@ -167,6 +169,7 @@ IniItem_Test::print_test()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
+                "y = \n"
                 "\n"
                 "[hmmm]\n"
                 "bool_value = true\n"
@@ -181,6 +184,7 @@ IniItem_Test::print_test()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
+                "y = \n"
                 "\n"
                 "(hmmm]\n"
                 "bool_value = true\n"
@@ -191,7 +195,7 @@ IniItem_Test::print_test()
 
     const std::string compareError("ERROR while parsing ini-formated string \n"
                                    "parser-message: syntax error \n"
-                                   "line-number: 6 \n"
+                                   "line-number: 7 \n"
                                    "position in line: 6 \n"
                                    "broken part in string: \"]\" \n");
     TEST_EQUAL(errorMessage, compareError);
@@ -209,6 +213,7 @@ IniItem_Test::getTestString()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
+                "y = \n"
                 "\n\n"
                 "[hmmm]\n"
                 "# this is only a simple 0815 testcommit\n\n"

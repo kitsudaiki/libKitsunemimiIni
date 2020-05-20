@@ -194,6 +194,12 @@ itemValue:
     {
         $$ = new DataValue(false);
     }
+|
+    %empty
+    {
+        $$ = new DataValue("");
+    }
+
 
 identifierlist:
     identifierlist "," "string"
