@@ -19,6 +19,9 @@ namespace Kitsunemimi
 {
 namespace Ini
 {
+
+Kitsunemimi::Ini::IniParserInterface* IniParserInterface::m_instance = nullptr;
+
 using Kitsunemimi::splitStringByDelimiter;
 
 bool IniParserInterface::m_outsideComment = true;
@@ -36,17 +39,40 @@ IniParserInterface::IniParserInterface(const bool traceParsing)
 }
 
 /**
+ * @brief static methode to get instance of the interface
+ *
+ * @return pointer to the static instance
+ */
+IniParserInterface*
+IniParserInterface::getInstance()
+{
+    if(m_instance == nullptr) {
+        m_instance = new IniParserInterface();
+    }
+
+    return m_instance;
+}
+
+/**
  * Start the scanner and parser
  *
  * @param inputFile string which should be parsed
  * @return true, if parsing was successful, else false
  */
-bool
-IniParserInterface::parse(const std::string &inputString)
+DataItem*
+IniParserInterface::parse(const std::string &inputString,
+                          std::string &errorMessage)
 {
+    DataItem* result = nullptr;
+
+    m_lock.lock();
+
     // init global values
     m_inputString = inputString;
     m_errorMessage = "";
+    if(m_output != nullptr) {
+        delete m_output;
+    }
     m_output = nullptr;
 
     // run parser-code
@@ -55,33 +81,48 @@ IniParserInterface::parse(const std::string &inputString)
     int res = parser.parse();
     this->scan_end();
 
-    if(res != 0) {
-        return false;
+    // handle negative result
+    if(res != 0)
+    {
+        errorMessage = m_errorMessage;
+        m_lock.unlock();
+        return nullptr;
     }
-    return true;
+
+    result = m_output->copy();
+
+    m_lock.unlock();
+
+    return result;
 }
 
 /**
- * @brief IniParserInterface::removeQuotes
- * @param input
- * @return
+ * @brief remove double quotes from the beginning and the end of a string
+ *
+ * @param input string to clear
+ *
+ * @return cleared string
  */
-std::string
-IniParserInterface::removeQuotes(std::string input)
+const std::string
+IniParserInterface::removeQuotes(const std::string &input)
 {
+    // precheck
     if(input.length() == 0) {
         return input;
     }
 
-    if(input[0] == '\"' && input[input.length()-1] == '\"')
+    // clear
+    if(input[0] == '\"'
+            && input[input.length()-1] == '\"')
     {
         std::string result = "";
-        for(uint32_t i = 1; i < input.length()-1; i++)
-        {
+        for(uint32_t i = 1; i < input.length()-1; i++) {
             result += input[i];
         }
+
         return result;
     }
+
     return input;
 }
 
@@ -94,17 +135,6 @@ void
 IniParserInterface::setOutput(DataItem *output)
 {
      m_output = output;
-}
-
-/**
- * getter for the data-output of the parser
- *
- * @return parser-output as DataArray
- */
-DataItem*
-IniParserInterface::getOutput() const
-{
-    return m_output;
 }
 
 /**
@@ -137,17 +167,6 @@ IniParserInterface::error(const Kitsunemimi::Ini::location& location,
     m_errorMessage += "line-number: " + std::to_string(linenumber) + " \n";
     m_errorMessage += "position in line: " + std::to_string(location.begin.column) + " \n";
     m_errorMessage += "broken part in string: \"" + errorStringPart + "\" \n";
-}
-
-/**
- * getter fot the error-message in case of an error while parsing
- *
- * @return error-message
- */
-std::string
-IniParserInterface::getErrorMessage() const
-{
-    return m_errorMessage;
 }
 
 }  // namespace Ini
