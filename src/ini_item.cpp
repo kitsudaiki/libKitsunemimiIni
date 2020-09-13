@@ -44,34 +44,27 @@ IniItem::~IniItem()
  *
  * @param content content of an ini-file as string
  * @param errorMessage reference for error-message output
- * @param traceParsing trace parser-actions for debugging only (Default: false)
  *
  * @return true, if successful, else false
  */
 bool
 IniItem::parse(const std::string &content,
-               std::string &errorMessage,
-               const bool traceParsing)
+               std::string &errorMessage)
 {
-    IniParserInterface parser(traceParsing);
+    IniParserInterface* parser = IniParserInterface::getInstance();
 
-    // parse ini-template into a data-tree
-    bool result = parser.parse(content);
-
-    // process a failure
-    if(result == false)
-    {
-        errorMessage = parser.getErrorMessage();
-        return result;
-    }
-
-    // delete old content, if exist and get the new one from the parser
+    // clear acutal content to free memory
     if(m_content != nullptr) {
         delete m_content;
     }
-    m_content = parser.getOutput();
 
-    return result;
+    // parse ini-template into a data-tree
+    m_content = parser->parse(content, errorMessage);
+    if(m_content == nullptr) {
+        return false;
+    }
+
+    return true;
 }
 
 /**

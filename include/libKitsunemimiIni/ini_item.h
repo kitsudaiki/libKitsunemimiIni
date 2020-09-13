@@ -29,8 +29,7 @@ public:
     ~IniItem();
 
     bool parse(const std::string &content,
-               std::string &errorMessage,
-               const bool traceParsing = false);
+               std::string &errorMessage);
 
     // get
     DataItem* get(const std::string &group,

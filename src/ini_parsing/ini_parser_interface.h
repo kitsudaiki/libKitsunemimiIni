@@ -11,11 +11,9 @@
 
 #include <vector>
 #include <string>
-#include <string>
 #include <map>
+#include <mutex>
 #include <libKitsunemimiCommon/common_items/data_items.h>
-
-#include <iostream>
 
 using Kitsunemimi::DataItem;
 using std::string;
@@ -32,30 +30,33 @@ class IniParserInterface
 {
 
 public:
-    IniParserInterface(const bool traceParsing);
+    static IniParserInterface* getInstance();
 
     // connection the the scanner and parser
     void scan_begin(const std::string &inputString);
     void scan_end();
-    bool parse(const std::string &inputString);
+    DataItem* parse(const std::string &inputString, std::string &errorMessage);
     std::string removeQuotes(std::string input);
 
     // output-handling
     void setOutput(DataItem* output);
-    DataItem* getOutput() const;
 
     // Error handling.
     void error(const Kitsunemimi::Ini::location &location,
                const std::string& message);
-    std::string getErrorMessage() const;
 
     // static variables, which are used in lexer and parser
     static bool m_outsideComment;
 
 private:
+    IniParserInterface(const bool traceParsing = false);
+
+    static IniParserInterface* m_instance;
+
     DataItem* m_output;
     std::string m_errorMessage = "";
     std::string m_inputString = "";
+    std::mutex m_lock;
 
     bool m_traceParsing = false;
 };
