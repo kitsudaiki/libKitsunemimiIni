@@ -36,7 +36,7 @@ public:
     void scan_begin(const std::string &inputString);
     void scan_end();
     DataItem* parse(const std::string &inputString, std::string &errorMessage);
-    std::string removeQuotes(std::string input);
+    const std::string removeQuotes(const std::string &input);
 
     // output-handling
     void setOutput(DataItem* output);

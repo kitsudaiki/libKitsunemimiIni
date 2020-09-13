@@ -97,26 +97,32 @@ IniParserInterface::parse(const std::string &inputString,
 }
 
 /**
- * @brief IniParserInterface::removeQuotes
- * @param input
- * @return
+ * @brief remove double quotes from the beginning and the end of a string
+ *
+ * @param input string to clear
+ *
+ * @return cleared string
  */
-std::string
-IniParserInterface::removeQuotes(std::string input)
+const std::string
+IniParserInterface::removeQuotes(const std::string &input)
 {
+    // precheck
     if(input.length() == 0) {
         return input;
     }
 
-    if(input[0] == '\"' && input[input.length()-1] == '\"')
+    // clear
+    if(input[0] == '\"'
+            && input[input.length()-1] == '\"')
     {
         std::string result = "";
-        for(uint32_t i = 1; i < input.length()-1; i++)
-        {
+        for(uint32_t i = 1; i < input.length()-1; i++) {
             result += input[i];
         }
+
         return result;
     }
+
     return input;
 }
 
