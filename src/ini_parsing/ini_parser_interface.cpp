@@ -54,10 +54,12 @@ IniParserInterface::getInstance()
 }
 
 /**
- * Start the scanner and parser
+ * @brief parse string
  *
- * @param inputFile string which should be parsed
- * @return true, if parsing was successful, else false
+ * @param inputString string which should be parsed
+ * @param reference for error-message
+ *
+ * @return resulting object
  */
 DataItem*
 IniParserInterface::parse(const std::string &inputString,

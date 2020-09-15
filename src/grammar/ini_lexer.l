@@ -44,18 +44,17 @@ blank [ \t]
     iniloc.step();
 %}
 
-
-{blank}+    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { iniloc.step();  } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+#.*$        iniloc.step();
+{blank}+    iniloc.step();
 [\n]        {iniloc.lines(1); return Kitsunemimi::Ini::IniParser::make_LINEBREAK (iniloc); }
-"true"      if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"false"     if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"="         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_EQUAL (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"["         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BRACKOPEN (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"]"         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_BRACKCLOSE (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-","         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_COMMA (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
-"#"         if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_COMMENT (iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+"true"      return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc);
+"false"     return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc);
+"="         return Kitsunemimi::Ini::IniParser::make_EQUAL (iniloc);
+"["         return Kitsunemimi::Ini::IniParser::make_BRACKOPEN (iniloc);
+"]"         return Kitsunemimi::Ini::IniParser::make_BRACKCLOSE (iniloc);
+","         return Kitsunemimi::Ini::IniParser::make_COMMA (iniloc);
 \"(\\.|[^"\\])*\" {
-            if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_STRING(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+            return Kitsunemimi::Ini::IniParser::make_STRING(yytext, iniloc);
 }
 
 
@@ -68,22 +67,22 @@ blank [ \t]
     {
         driver.error(iniloc, "integer is out of range");
     }
-    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc);
 }
 
 {long}+"."{long}*       {
     double value = strtod( yytext , NULL );
-    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc);
 }
 
-{id} if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_IDENTIFIER(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+{id} return Kitsunemimi::Ini::IniParser::make_IDENTIFIER(yytext, iniloc);
 
 
 [a-zA-Z_0-9|\-|.]* {
-    if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { return Kitsunemimi::Ini::IniParser::make_STRING_PLN(yytext, iniloc); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+    return Kitsunemimi::Ini::IniParser::make_STRING_PLN(yytext, iniloc);
 }
 
-.          if(Kitsunemimi::Ini::IniParserInterface::m_outsideComment) { driver.error(iniloc, "invalid character"); } else { return Kitsunemimi::Ini::IniParser::make_DEFAULTRULE(yytext, iniloc); }
+.          driver.error(iniloc, "invalid character");
 <<EOF>>    return Kitsunemimi::Ini::IniParser::make_END(iniloc);
 
 %%
