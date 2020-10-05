@@ -53,7 +53,7 @@ private:
 
     static IniParserInterface* m_instance;
 
-    DataItem* m_output;
+    DataItem* m_output = nullptr;
     std::string m_errorMessage = "";
     std::string m_inputString = "";
     std::mutex m_lock;
