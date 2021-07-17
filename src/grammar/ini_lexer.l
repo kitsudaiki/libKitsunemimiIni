@@ -49,6 +49,8 @@ blank [ \t]
 [\n]        {iniloc.lines(1); return Kitsunemimi::Ini::IniParser::make_LINEBREAK (iniloc); }
 "true"      return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc);
 "false"     return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc);
+"True"      return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc);
+"False"     return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc);
 "="         return Kitsunemimi::Ini::IniParser::make_EQUAL (iniloc);
 "["         return Kitsunemimi::Ini::IniParser::make_BRACKOPEN (iniloc);
 "]"         return Kitsunemimi::Ini::IniParser::make_BRACKCLOSE (iniloc);
