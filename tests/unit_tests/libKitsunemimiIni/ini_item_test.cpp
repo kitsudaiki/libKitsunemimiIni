@@ -62,6 +62,9 @@ IniItem_Test::get_test()
 
     bool getBool = object.get("hmmm", "bool_value")->toValue()->getBool();
     TEST_EQUAL(getBool, true);
+
+    getBool = object.get("hmmm", "bool_value2")->toValue()->getBool();
+    TEST_EQUAL(getBool, true);
 }
 
 /**
@@ -132,6 +135,7 @@ IniItem_Test::removeEntry_test()
                 "\n"
                 "[hmmm]\n"
                 "bool_value = true\n"
+                "bool_value2 = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
 
@@ -173,6 +177,7 @@ IniItem_Test::print_test()
                 "\n"
                 "[hmmm]\n"
                 "bool_value = true\n"
+                "bool_value2 = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     TEST_EQUAL(outputStringObjects, compare);
@@ -188,6 +193,7 @@ IniItem_Test::print_test()
                 "\n"
                 "(hmmm]\n"
                 "bool_value = true\n"
+                "bool_value2 = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     bool result = object.parse(badString, errorMessage);
@@ -216,8 +222,9 @@ IniItem_Test::getTestString()
                 "y = \n"
                 "\n\n"
                 "[hmmm]\n"
-                "# this is only a simple 0815 testcommit\n\n"
+                "# this is only a simple 0815 test-comment\n\n"
                 "bool_value = true\n"
+                "bool_value2 = True\n"
                 "poi_poi = 1.300000\n"
                 "\n");
     return testString;
