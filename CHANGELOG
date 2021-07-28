@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.7] - 2021-07-28
+
+### Added
+- True and False are now also allowed as bool-values beside true and false
+
 
 ## [0.4.6] - 2020-10-05
 
