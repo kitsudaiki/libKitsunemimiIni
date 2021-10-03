@@ -1,7 +1,7 @@
 QT -= qt core gui
 
 TARGET = KitsunemimiIni
-CONFIG += c++14
+CONFIG += c++17
 TEMPLATE = lib
 VERSION = 0.4.7
 
