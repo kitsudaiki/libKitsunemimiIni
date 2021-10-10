@@ -295,7 +295,7 @@ IniItem::toString()
     std::string output = "";
 
     // iterate over all groups
-    const std::map<std::string, DataItem*> completeContent = m_content->toMap()->m_map;
+    const std::map<std::string, DataItem*> completeContent = m_content->toMap()->map;
     std::map<std::string, DataItem*>::const_iterator itGroup;
     for(itGroup = completeContent.begin();
         itGroup != completeContent.end();
@@ -307,7 +307,7 @@ IniItem::toString()
         output.append("]\n");
 
         // iterate over group-content
-        const std::map<std::string, DataItem*> groupContent = itGroup->second->toMap()->m_map;
+        const std::map<std::string, DataItem*> groupContent = itGroup->second->toMap()->map;
         map<string, DataItem*>::const_iterator itItem;
         for(itItem = groupContent.begin();
             itItem != groupContent.end();
@@ -320,7 +320,7 @@ IniItem::toString()
             if(itItem->second->getType() == DataItem::ARRAY_TYPE)
             {
                 // print arrays
-                const std::vector<DataItem*> array = itItem->second->toArray()->m_array;
+                const std::vector<DataItem*> array = itItem->second->toArray()->array;
                 for(uint64_t i = 0; i < array.size(); i++)
                 {
                     if(i != 0) {
