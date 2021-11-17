@@ -66,6 +66,7 @@ The `IniItem`-class is the handler for the ini-file-content. The functions in th
 
 ```cpp
 #include <libKitsunemimiIni/ini_item.h>
+#include <libKitsunemimiCommon/logger.h>
 
 // short test-string for demonstration. 
 const std::string testString(
@@ -81,8 +82,9 @@ const std::string testString(
 IniItem object;
 
 // parse the test-string
-std::string errorMessage = "";
-bool result = object.parse(testString, errorMessage);
+ErrorContainer error;
+
+bool result = object.parse(testString, error);
 // if result.first is true, then paring was successful
 
 DataItem* value = object.get("DEFAULT", "x")
