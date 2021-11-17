@@ -14,6 +14,8 @@
 #include <vector>
 #include <map>
 
+#include <libKitsunemimiCommon/logger.h>
+
 namespace Kitsunemimi
 {
 class DataItem;
@@ -29,7 +31,7 @@ public:
     ~IniItem();
 
     bool parse(const std::string &content,
-               std::string &errorMessage);
+               ErrorContainer &error);
 
     // get
     DataItem* get(const std::string &group,

@@ -49,7 +49,7 @@ IniItem::~IniItem()
  */
 bool
 IniItem::parse(const std::string &content,
-               std::string &errorMessage)
+               ErrorContainer &error)
 {
     IniParserInterface* parser = IniParserInterface::getInstance();
 
@@ -59,8 +59,10 @@ IniItem::parse(const std::string &content,
     }
 
     // parse ini-template into a data-tree
-    m_content = parser->parse(content, errorMessage);
-    if(m_content == nullptr) {
+    m_content = parser->parse(content, error);
+    if(m_content == nullptr)
+    {
+        LOG_ERROR(error);
         return false;
     }
 

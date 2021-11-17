@@ -33,13 +33,13 @@ void
 IniItem_Test::parse_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    bool result = object.parse(getTestString(), errorMessage);
+    bool result = object.parse(getTestString(), error);
 
     TEST_EQUAL(result, true);
     if(result == false) {
-        std::cout<<"errorMessage: "<<errorMessage<<std::endl;
+        std::cout<<"errorMessage: "<<error.toString()<<std::endl;
     }
 }
 
@@ -50,9 +50,9 @@ void
 IniItem_Test::get_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    object.parse(getTestString(), errorMessage);
+    object.parse(getTestString(), error);
 
     std::string get1 = object.get("DEFAULT", "x")->toValue()->toString();
     TEST_EQUAL(get1, "2");
@@ -74,9 +74,9 @@ void
 IniItem_Test::set_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    object.parse(getTestString(), errorMessage);
+    object.parse(getTestString(), error);
 
     TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), true);
     TEST_EQUAL(object.set("hmmm2", "poi", "asdf"), false);
@@ -94,9 +94,9 @@ void
 IniItem_Test::removeGroup_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    object.parse(getTestString(), errorMessage);
+    object.parse(getTestString(), error);
 
     TEST_EQUAL(object.removeGroup("hmmm"), true);
     TEST_EQUAL(object.removeGroup("hmmm"), false);
@@ -119,9 +119,9 @@ void
 IniItem_Test::removeEntry_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    object.parse(getTestString(), errorMessage);
+    object.parse(getTestString(), error);
 
     TEST_EQUAL(object.removeEntry("DEFAULT", "x"), true);
     TEST_EQUAL(object.removeEntry("DEFAULT", "x"), false);
@@ -162,9 +162,9 @@ void
 IniItem_Test::print_test()
 {
     IniItem object;
-    std::string errorMessage = "";
+    ErrorContainer error;
 
-    object.parse(getTestString(), errorMessage);
+    object.parse(getTestString(), error);
 
     const std::string outputStringObjects = object.toString();
 
@@ -196,15 +196,18 @@ IniItem_Test::print_test()
                 "bool_value2 = true\n"
                 "poi_poi = 1.300000\n"
                 "\n");
-    bool result = object.parse(badString, errorMessage);
+    bool result = object.parse(badString, error);
     TEST_EQUAL(result, false);
 
-    const std::string compareError("ERROR while parsing ini-formated string \n"
-                                   "parser-message: syntax error \n"
-                                   "line-number: 7 \n"
-                                   "position in line: 6 \n"
-                                   "broken part in string: \"]\" \n");
-    TEST_EQUAL(errorMessage, compareError);
+    const std::string compareError =
+            "+---------------------+------------------------------------------+\n"
+            "| Error-Message Nr. 0 | ERROR while parsing ini-formated string  |\n"
+            "|                     | parser-message: syntax error             |\n"
+            "|                     | line-number: 7                           |\n"
+            "|                     | position in line: 6                      |\n"
+            "|                     | broken part in string: \"]\"               |\n"
+            "+---------------------+------------------------------------------+\n";
+    TEST_EQUAL(error.toString(), compareError);
 }
 
 /**

@@ -57,17 +57,17 @@ IniParserInterface::getInstance()
  * @brief parse string
  *
  * @param inputString string which should be parsed
- * @param reference for error-message
+ * @param error reference for error-message
  *
  * @return resulting object
  */
 DataItem*
 IniParserInterface::parse(const std::string &inputString,
-                          std::string &errorMessage)
+                          ErrorContainer &error)
 {
     DataItem* result = nullptr;
 
-    m_lock.lock();
+    std::lock_guard<std::mutex> guard(m_lock);
 
     // init global values
     m_inputString = inputString;
@@ -86,14 +86,12 @@ IniParserInterface::parse(const std::string &inputString,
     // handle negative result
     if(res != 0)
     {
-        errorMessage = m_errorMessage;
-        m_lock.unlock();
+        error.addMeesage(m_errorMessage);
+        LOG_ERROR(error);
         return nullptr;
     }
 
     result = m_output->copy();
-
-    m_lock.unlock();
 
     return result;
 }
