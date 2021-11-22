@@ -189,7 +189,7 @@ IniItem_Test::print_test()
                 "asdf = asdf.asdf\n"
                 "id = 550e8400-e29b-11d4-a716-446655440000\n"
                 "x = 2\n"
-                "y = \n"
+                "y = 3\n"
                 "\n"
                 "(hmmm]\n"
                 "bool_value = true\n"
@@ -202,10 +202,10 @@ IniItem_Test::print_test()
     const std::string compareError =
             "+---------------------+------------------------------------------+\n"
             "| Error-Message Nr. 0 | ERROR while parsing ini-formated string  |\n"
-            "|                     | parser-message: syntax error             |\n"
+            "|                     | parser-message: invalid character        |\n"
             "|                     | line-number: 7                           |\n"
-            "|                     | position in line: 6                      |\n"
-            "|                     | broken part in string: \"]\"               |\n"
+            "|                     | position in line: 1                      |\n"
+            "|                     | broken part in string: \"(\"               |\n"
             "+---------------------+------------------------------------------+\n";
     TEST_EQUAL(error.toString(), compareError);
 }
