@@ -32,6 +32,7 @@ Kitsunemimi::Ini::location iniloc;
 %option noyywrap nounput batch debug yylineno prefix="ini"
 id    [%\-+\/@.:a-zA-Z_0-9]*
 long   -?([0-9]+)
+double -?([0-9]+)\.([0-9]+)
 blank [ \t]
 
 %{
@@ -72,7 +73,7 @@ blank [ \t]
     return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc);
 }
 
-{long}+"."{long}*       {
+{double}	{
     double value = strtod( yytext , NULL );
     return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc);
 }
