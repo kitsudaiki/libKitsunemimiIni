@@ -8,7 +8,7 @@
 
 #include <ini_parsing/ini_parser_interface.h>
 #include <ini_parser.h>
-#include <libKitsunemimiCommon/common_methods/string_methods.h>
+#include <libKitsunemimiCommon/methods/string_methods.h>
 
 # define YY_DECL \
     Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)

@@ -8,7 +8,7 @@
 
 #include <libKitsunemimiIni/ini_item.h>
 
-#include <libKitsunemimiCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/items/data_items.h>
 #include <ini_parsing/ini_parser_interface.h>
 
 using Kitsunemimi::DataItem;

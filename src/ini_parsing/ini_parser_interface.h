@@ -13,7 +13,7 @@
 #include <string>
 #include <map>
 #include <mutex>
-#include <libKitsunemimiCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/items/data_items.h>
 #include <libKitsunemimiCommon/logger.h>
 
 using Kitsunemimi::DataItem;

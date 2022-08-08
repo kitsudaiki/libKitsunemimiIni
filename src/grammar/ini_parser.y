@@ -27,7 +27,7 @@
 #include <utility>
 #include <iostream>
 #include <vector>
-#include <libKitsunemimiCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/items/data_items.h>
 
 using Kitsunemimi::DataItem;
 using Kitsunemimi::DataArray;
