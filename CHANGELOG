@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.0] - 2022-10-07
+
+### Changed
+- only updated dependencies
+
+### Fixed
+- fix for the regex of float-values
+
+
 ## [0.5.1] - 2021-11-26
 
 ### Fixed
