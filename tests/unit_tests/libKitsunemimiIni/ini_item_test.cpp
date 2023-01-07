@@ -12,8 +12,6 @@
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 
 IniItem_Test::IniItem_Test()
     : Kitsunemimi::CompareTestHelper("IniItem_Test")
@@ -233,6 +231,5 @@ IniItem_Test::getTestString()
     return testString;
 }
 
-}  // namespace Ini
 }  // namespace Kitsunemimi
 

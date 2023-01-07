@@ -19,8 +19,7 @@
 namespace Kitsunemimi
 {
 class DataItem;
-namespace Ini
-{
+
 class IniParserInterface;
 
 class IniItem
@@ -80,7 +79,6 @@ private:
              bool force = false);
 };
 
-}  // namespace Ini
 }  // namespace Kitsunemimi
 
 #endif // INIITEM_H

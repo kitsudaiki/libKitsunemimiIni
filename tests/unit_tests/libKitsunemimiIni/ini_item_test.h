@@ -14,8 +14,6 @@
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 class IniItem_Test
         : public Kitsunemimi::CompareTestHelper
 {
@@ -33,7 +31,6 @@ private:
     const std::string getTestString();
 };
 
-}  // namespace Ini
 }  // namespace Kitsunemimi
 
 #endif // PARSERTEST_H

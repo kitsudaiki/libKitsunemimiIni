@@ -22,10 +22,10 @@
 # undef YY_DECL
 # endif
 # define YY_DECL \
-    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
+    Kitsunemimi::IniParser::symbol_type inilex (Kitsunemimi::IniParserInterface& driver)
 YY_DECL;
 
-Kitsunemimi::Ini::location iniloc;
+Kitsunemimi::location iniloc;
 %}
 
 
@@ -47,17 +47,17 @@ blank [ \t]
 
 #.*$        iniloc.step();
 {blank}+    iniloc.step();
-[\n]        {iniloc.lines(1); return Kitsunemimi::Ini::IniParser::make_LINEBREAK (iniloc); }
-"true"      return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc);
-"false"     return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc);
-"True"      return Kitsunemimi::Ini::IniParser::make_BOOL_TRUE (iniloc);
-"False"     return Kitsunemimi::Ini::IniParser::make_BOOL_FALSE (iniloc);
-"="         return Kitsunemimi::Ini::IniParser::make_EQUAL (iniloc);
-"["         return Kitsunemimi::Ini::IniParser::make_BRACKOPEN (iniloc);
-"]"         return Kitsunemimi::Ini::IniParser::make_BRACKCLOSE (iniloc);
-","         return Kitsunemimi::Ini::IniParser::make_COMMA (iniloc);
+[\n]        {iniloc.lines(1); return Kitsunemimi::IniParser::make_LINEBREAK (iniloc); }
+"true"      return Kitsunemimi::IniParser::make_BOOL_TRUE (iniloc);
+"false"     return Kitsunemimi::IniParser::make_BOOL_FALSE (iniloc);
+"True"      return Kitsunemimi::IniParser::make_BOOL_TRUE (iniloc);
+"False"     return Kitsunemimi::IniParser::make_BOOL_FALSE (iniloc);
+"="         return Kitsunemimi::IniParser::make_EQUAL (iniloc);
+"["         return Kitsunemimi::IniParser::make_BRACKOPEN (iniloc);
+"]"         return Kitsunemimi::IniParser::make_BRACKCLOSE (iniloc);
+","         return Kitsunemimi::IniParser::make_COMMA (iniloc);
 \"(\\.|[^"\\])*\" {
-            return Kitsunemimi::Ini::IniParser::make_STRING(yytext, iniloc);
+            return Kitsunemimi::IniParser::make_STRING(yytext, iniloc);
 }
 
 
@@ -70,36 +70,36 @@ blank [ \t]
     {
         driver.error(iniloc, "integer is out of range");
     }
-    return Kitsunemimi::Ini::IniParser::make_NUMBER (length, iniloc);
+    return Kitsunemimi::IniParser::make_NUMBER (length, iniloc);
 }
 
 {double}	{
     double value = strtod( yytext , NULL );
-    return Kitsunemimi::Ini::IniParser::make_FLOAT(value, iniloc);
+    return Kitsunemimi::IniParser::make_FLOAT(value, iniloc);
 }
 
-{id} return Kitsunemimi::Ini::IniParser::make_IDENTIFIER(yytext, iniloc);
+{id} return Kitsunemimi::IniParser::make_IDENTIFIER(yytext, iniloc);
 
 
 [a-zA-Z_0-9|\-|.]* {
-    return Kitsunemimi::Ini::IniParser::make_STRING_PLN(yytext, iniloc);
+    return Kitsunemimi::IniParser::make_STRING_PLN(yytext, iniloc);
 }
 
 .          driver.error(iniloc, "invalid character");
-<<EOF>>    return Kitsunemimi::Ini::IniParser::make_END(iniloc);
+<<EOF>>    return Kitsunemimi::IniParser::make_END(iniloc);
 
 %%
 
 
-void Kitsunemimi::Ini::IniParserInterface::scan_begin(const std::string &inputString)
+void Kitsunemimi::IniParserInterface::scan_begin(const std::string &inputString)
 {
-    Kitsunemimi::Ini::location newLoc;
+    Kitsunemimi::location newLoc;
     iniloc = newLoc;
     yy_flex_debug = m_traceParsing;
     yy_scan_string(inputString.c_str());
 }
 
-void Kitsunemimi::Ini::IniParserInterface::scan_end()
+void Kitsunemimi::IniParserInterface::scan_end()
 {
     yy_delete_buffer(YY_CURRENT_BUFFER);
 }
