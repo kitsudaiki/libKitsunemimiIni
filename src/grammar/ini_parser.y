@@ -15,7 +15,7 @@
 %define parser_class_name {IniParser}
 
 %define api.prefix {ini}
-%define api.namespace {Kitsunemimi::Ini}
+%define api.namespace {Kitsunemimi}
 %define api.token.constructor
 %define api.value.type variant
 %define parse.assert
@@ -36,15 +36,12 @@ using Kitsunemimi::DataMap;
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 class IniParserInterface;
-}  // namespace Ini
 }  // namespace Kitsunemimi
 }
 
 // The parsing context.
-%param { Kitsunemimi::Ini::IniParserInterface& driver }
+%param { Kitsunemimi::IniParserInterface& driver }
 
 %locations
 
@@ -53,7 +50,7 @@ class IniParserInterface;
 #include <ini_parsing/ini_parser_interface.h>
 # undef YY_DECL
 # define YY_DECL \
-    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
+    Kitsunemimi::IniParser::symbol_type inilex (Kitsunemimi::IniParserInterface& driver)
 YY_DECL;
 }
 
@@ -252,8 +249,8 @@ linebreaks:
 
 %%
 
-void Kitsunemimi::Ini::IniParser::error(const Kitsunemimi::Ini::location& location,
-                                    const std::string& message)
+void Kitsunemimi::IniParser::error(const Kitsunemimi::location& location,
+                                   const std::string& message)
 {
     driver.error(location, message);
 }

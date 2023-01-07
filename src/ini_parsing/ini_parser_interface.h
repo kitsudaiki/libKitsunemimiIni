@@ -23,8 +23,6 @@ using std::pair;
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 class location;
 
 class IniParserInterface
@@ -43,7 +41,7 @@ public:
     void setOutput(DataItem* output);
 
     // Error handling.
-    void error(const Kitsunemimi::Ini::location &location,
+    void error(const Kitsunemimi::location &location,
                const std::string& message);
 
     // static variables, which are used in lexer and parser
@@ -62,7 +60,6 @@ private:
     bool m_traceParsing = false;
 };
 
-}  // namespace Ini
 }  // namespace Kitsunemimi
 
 #endif // INIPARSERINTERFACE_H

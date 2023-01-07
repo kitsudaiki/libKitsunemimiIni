@@ -11,16 +11,14 @@
 #include <libKitsunemimiCommon/methods/string_methods.h>
 
 # define YY_DECL \
-    Kitsunemimi::Ini::IniParser::symbol_type inilex (Kitsunemimi::Ini::IniParserInterface& driver)
+    Kitsunemimi::IniParser::symbol_type inilex (Kitsunemimi::IniParserInterface& driver)
 YY_DECL;
 
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 
-Kitsunemimi::Ini::IniParserInterface* IniParserInterface::m_instance = nullptr;
+Kitsunemimi::IniParserInterface* IniParserInterface::m_instance = nullptr;
 
 using Kitsunemimi::splitStringByDelimiter;
 
@@ -79,7 +77,7 @@ IniParserInterface::parse(const std::string &inputString,
 
     // run parser-code
     this->scan_begin(inputString);
-    Kitsunemimi::Ini::IniParser parser(*this);
+    Kitsunemimi::IniParser parser(*this);
     int res = parser.parse();
     this->scan_end();
 
@@ -147,7 +145,7 @@ IniParserInterface::setOutput(DataItem *output)
  * @param message error-specific message from the parser
  */
 void
-IniParserInterface::error(const Kitsunemimi::Ini::location& location,
+IniParserInterface::error(const location &location,
                           const std::string& message)
 {
     if(m_errorMessage.size() > 0) {
@@ -180,5 +178,4 @@ IniParserInterface::error(const Kitsunemimi::Ini::location& location,
     }
 }
 
-}  // namespace Ini
 }  // namespace Kitsunemimi

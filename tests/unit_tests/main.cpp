@@ -10,6 +10,6 @@
 
 int main()
 {
-    Kitsunemimi::Ini::IniItem_Test iniItem_test;
+    Kitsunemimi::IniItem_Test iniItem_test;
     return 0;
 }

@@ -18,8 +18,6 @@ using Kitsunemimi::DataMap;
 
 namespace Kitsunemimi
 {
-namespace Ini
-{
 
 /**
  * constructor
@@ -346,5 +344,4 @@ IniItem::toString()
     return output;
 }
 
-}  // namespace Ini
 }  // namespace Kitsunemimi
