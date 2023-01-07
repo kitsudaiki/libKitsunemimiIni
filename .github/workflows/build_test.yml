@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: registry.gitlab.com/kitsudaiki/kitsunemimi-ci-docker-images/normal-tests:1.2.0
-    name: functional-test-job
+    name: unit-tests-job
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v3
